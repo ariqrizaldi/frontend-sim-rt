@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, computed } from 'vue'
 
 import App from './App.vue'
 import router from './router'
@@ -26,6 +26,27 @@ const defaultDocumentTitle = 'SIM RT - BPS RI'
 router.beforeEach(to => {
   store.dispatch('asideMobileToggle', false)
   store.dispatch('asideLgToggle', false)
+})
+router.beforeEach((to, from, next) => {
+  const { authorize } = to.meta
+  const currentUser = computed(() => store.state.auth.user)
+  console.log(authorize)
+  console.log(currentUser.value)
+
+  if (authorize) {
+    if (!currentUser.value) {
+      // not logged in so redirect to login page with the return url
+      return next({ path: '/login', query: { returnUrl: to.path } })
+    }
+
+    // check if route is restricted by role
+    if (authorize.length && !currentUser.value.roles.includes(authorize)) {
+      // role not authorised so redirect to home page
+      return next({ path: '/' })
+    }
+  }
+
+  next()
 })
 
 router.afterEach(to => {

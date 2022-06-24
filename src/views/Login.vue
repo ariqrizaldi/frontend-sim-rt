@@ -1,5 +1,9 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { ref, reactive, onMounted, computed, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+import useValidate from '@vuelidate/core'
+import { createToaster } from '@meforma/vue-toaster'
+import { required, helpers } from '@vuelidate/validators'
 import { useRouter } from 'vue-router'
 import { mdiAccount, mdiEyeOff, mdiEye } from '@mdi/js'
 import FullScreenSection from '@/components/FullScreenSection.vue'
@@ -11,17 +15,56 @@ import Divider from '@/components/Divider.vue'
 import JbButton from '@/components/JbButton.vue'
 import JbButtons from '@/components/JbButtons.vue'
 
-const form = reactive({
-  login: '',
-  pass: ''
+const store = useStore()
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
 })
+
+onMounted(() => {
+  // dispatch the fetch action which commits a mutation 'SET_ITEMS' to update
+  v$.value.$validate()
+})
+onBeforeMount(() => {
+  if (loggedIn.value) {
+    router.push('/home')
+  }
+})
+
+const form = reactive({
+  nama: '',
+  password: ''
+})
+const loggedIn = computed(() => store.state.auth.status.loggedIn)
+const rules = computed(() => {
+  return {
+    nama: { required: helpers.withMessage('Wajib disi', required) },
+    password: { required: helpers.withMessage('Wajib diisi', required) }
+  }
+})
+
+const v$ = useValidate(rules, form)
 
 const router = useRouter()
 
 const isVisible = ref(false)
 
 const submit = () => {
-  router.push('/admin')
+  if (!v$.value.$error) {
+    const data = {
+      nama: form.nama,
+      password: form.password
+    }
+    console.log(data)
+    store.dispatch('auth/login', data).then(
+      (data) => {
+        toast.success('Sukses Login')
+        router.push('/profile')
+      }, (error) => {
+        toast.error('Login gagal ! ' + error.message)
+      })
+  } else toast.error('Isi form sesuai ketentuan')
 }
 </script>
 
@@ -41,15 +84,21 @@ const submit = () => {
           SIM-RT BPS RI
         </p>
       </div>
-      <divider />
+      <div class="flex items-center justify-center">
+        <p class="text-lg lg:text-xl font-medium mb-4 ">
+          Login
+        </p>
+      </div>
       <field
-        label="Login"
+        label="Nama"
         help="Masukkan nama anda"
+        :error="v$.nama.$error"
+        :message="v$.nama.$errors[0]"
       >
         <control
-          v-model="form.login"
+          v-model="form.nama"
           :icon="mdiAccount"
-          name="login"
+          name="nama"
           autocomplete="nama"
         />
       </field>
@@ -57,6 +106,8 @@ const submit = () => {
       <field
         label="Password"
         help="Masukkan password anda"
+        :error="v$.password.$error"
+        :message="v$.password.$errors[0]"
       >
         <control
           v-model="form.password"

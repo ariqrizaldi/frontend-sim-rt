@@ -15,6 +15,12 @@ import JbButton from '@/components/JbButton.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import Divider from '@/components/Divider.vue'
 // import TitledSection from '@/components/TitledSection.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const titleStack = ref(['User', 'Laporan Kerusakan'])
 
@@ -32,7 +38,7 @@ const form = reactive({
   jenisKerusakan: 1,
   lokasi: '',
   deskripsi: '',
-  user: store.state.userId
+  user: store.state.auth.user.id
 })
 
 const rules = computed(() => {
@@ -66,13 +72,13 @@ const submit = () => {
     DataService.create('/laporanKerusakans', data)
       .then((response) => {
         store.dispatch('fetch', 'laporanKerusakans')
-        alert('Berhasil membuat Laporan Kerusakan baru')
+        toast.success('Berhasil membuat Laporan Kerusakan baru')
         resetForm()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 </script>
 

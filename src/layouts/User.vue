@@ -9,13 +9,6 @@ import Overlay from '@/components/Overlay.vue'
 
 const store = useStore()
 
-store.commit('user', {
-  name: 'user',
-  email: 'user@gmail.com',
-  role: 1,
-  id: 20
-})
-
 const isAsideLgActive = computed(() => store.state.isAsideLgActive)
 
 const overlayClick = () => {

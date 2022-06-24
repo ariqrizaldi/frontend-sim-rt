@@ -22,7 +22,7 @@ const titleStack = ref(['Admin', 'Kendaraan Dinas'])
 
 <template>
   <title-bar :title-stack="titleStack" />
-  <hero-bar>Daftar Kendaraan DInas</hero-bar>
+  <hero-bar>Daftar Kendaraan Dinas</hero-bar>
   <main-section>
     <card-component
       class="mb-6"

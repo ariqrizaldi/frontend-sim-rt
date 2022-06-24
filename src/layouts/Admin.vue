@@ -13,7 +13,7 @@ store.commit('user', {
   name: 'Admin',
   email: 'admin@gmail.com',
   role: 2,
-  id: 20
+  id: 34
 })
 
 const isAsideLgActive = computed(() => store.state.isAsideLgActive)

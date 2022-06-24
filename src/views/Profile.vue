@@ -11,11 +11,10 @@ import Control from '@/components/Control.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import JbButton from '@/components/JbButton.vue'
 import JbButtons from '@/components/JbButtons.vue'
-import UserCard from '@/components/UserCard.vue'
 
 const store = useStore()
 
-const titleStack = ref(['Admin', 'Profile'])
+const titleStack = ref(['Profile Pengguna'])
 
 const profileForm = reactive({
   name: store.state.userName,
@@ -39,9 +38,6 @@ const submitPass = () => {
 
 <template>
   <title-bar :title-stack="titleStack" />
-
-  <user-card />
-
   <main-section>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <card-component

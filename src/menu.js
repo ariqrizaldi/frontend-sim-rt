@@ -213,7 +213,7 @@ export const admin = [
 export const staff = [
   [
     {
-      to: '/admin/dashboard',
+      to: '/staff/dashboard',
       icon: mdiDesktopMac,
       label: 'Dashboard'
     }
@@ -226,27 +226,27 @@ export const staff = [
       icon: mdiViewList,
       menu: [
         {
-          to: '/admin/buat-laporan',
+          to: '/staff/buat-laporan',
           label: 'Buat Laporan',
           icon: mdiSquareEditOutline
         },
         {
-          to: '/admin/daftar-laporan-masuk',
+          to: '/staff/daftar-laporan-masuk',
           label: 'Daftar Laporan Masuk',
           icon: mdiTable
         },
         {
-          to: '/admin/daftar-laporan-aktif',
+          to: '/staff/daftar-laporan-aktif',
           label: 'Daftar Laporan Aktif',
           icon: mdiTable
         },
         {
-          to: '/admin/daftar-laporan-lanjutan',
+          to: '/staff/daftar-laporan-lanjutan',
           label: 'Daftar Laporan Lanjutan',
           icon: mdiTable
         },
         {
-          to: '/admin/riwayat-laporan',
+          to: '/staff/riwayat-laporan',
           label: 'Riwayat Laporan',
           icon: mdiTable
         }
@@ -258,22 +258,17 @@ export const staff = [
       icon: mdiViewList,
       menu: [
         {
-          to: '/admin/buat-peminjaman',
-          label: 'Buat Peminjaman',
-          icon: mdiSquareEditOutline
-        },
-        {
-          to: '/admin/daftar-peminjaman-masuk',
+          to: '/staff/daftar-peminjaman-masuk',
           label: 'Daftar Peminjaman Masuk',
           icon: mdiTable
         },
         {
-          to: '/admin/daftar-peminjaman-aktif',
+          to: '/staff/daftar-peminjaman-aktif',
           label: 'Daftar Peminjaman Aktif',
           icon: mdiTable
         },
         {
-          to: '/admin/riwayat-peminjaman',
+          to: '/staff/riwayat-peminjaman',
           label: 'Riwayat Peminjaman',
           icon: mdiTable
         }
@@ -285,34 +280,34 @@ export const staff = [
       icon: mdiViewList,
       menu: [
         {
-          to: '/admin/buat-servis',
+          to: '/staff/buat-servis',
           label: 'Buat Permintaan',
           icon: mdiSquareEditOutline
         },
         {
-          to: '/admin/daftar-servis-masuk',
+          to: '/staff/daftar-servis-masuk',
           label: 'Daftar Permintaan Masuk',
           icon: mdiTable
         },
         {
-          to: '/admin/daftar-servis-aktif',
+          to: '/staff/daftar-servis-aktif',
           label: 'Daftar Permintaan Aktif',
           icon: mdiTable
         },
         {
-          to: '/admin/riwayat-servis',
+          to: '/staff/riwayat-servis',
           label: 'Riwayat Permintaan',
           icon: mdiTable
         }
       ]
     },
     {
-      to: '/admin/daftar-stok-barang',
+      to: '/staff/daftar-stok-barang',
       icon: mdiTable,
       label: 'Stok Barang Gudang'
     },
     {
-      to: '/admin/daftar-kendaraan',
+      to: '/staff/daftar-kendaraan',
       icon: mdiTable,
       label: 'Kendaraan Dinas'
     }

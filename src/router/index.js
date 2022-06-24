@@ -1,14 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import Admin from '@/layouts/Admin.vue'
 import User from '@/layouts/User.vue'
+import Staff from '@/layouts/Staff.vue'
 import Admin from '@/layouts/Admin.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
+import Teknisi from '@/layouts/Teknisi.vue'
 
 const routes = [
   {
     path: '/user',
     redirect: '/user/dashboard',
     component: User,
+    meta: { authorize: 'ROLE_USER' },
     children: [
       {
         // Document title tag
@@ -89,22 +92,6 @@ const routes = [
       },
       {
         meta: {
-          title: 'Profile'
-        },
-        path: '/user/profile',
-        name: 'profile',
-        component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
-      },
-      {
-        meta: {
-          title: 'Ui'
-        },
-        path: '/user/ui',
-        name: 'ui',
-        component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
-      },
-      {
-        meta: {
           title: 'Responsive layout'
         },
         path: '/user/responsive',
@@ -115,9 +102,29 @@ const routes = [
     ]
   },
   {
+    path: '/teknisi',
+    redirect: '/teknisi/pekerjaan',
+    component: Teknisi,
+    children: [
+      {
+        // Document title tag
+        // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+        meta: {
+          title: 'Pekerjaan',
+          fullScreen: true
+        },
+        path: '/teknisi/pekerjaan',
+        name: 'Dashboard Teknisi',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Teknisi.vue')
+      }
+
+    ]
+  },
+  {
     path: '/admin',
     redirect: '/admin/dashboard',
     component: Admin,
+    meta: { authorize: 'ROLE_ADMIN' },
     children: [
       {
         // Document title tag
@@ -316,6 +323,136 @@ const routes = [
     ]
   },
   {
+    path: '/staff',
+    redirect: '/staff/dashboard',
+    component: Staff,
+    meta: { authorize: 'ROLE_STAFF' },
+    children: [
+      {
+        // Document title tag
+        // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+        meta: {
+          title: 'Dashboard'
+        },
+        path: '/staff/dashboard',
+        name: 'Dashboard Staff',
+        component: Dashboard
+      },
+      {
+        meta: {
+          title: 'Form Laporan Kerusakan'
+        },
+        path: '/staff/buat-laporan',
+        name: 'Buat Laporan Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/BuatLaporan.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Laporan Kerusakan Masuk'
+        },
+        path: '/staff/daftar-laporan-masuk',
+        name: 'Daftar Laporan Masuk Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarLaporanMasuk.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Laporan Kerusakan Ditangani'
+        },
+        path: '/staff/daftar-laporan-aktif',
+        name: 'Daftar Laporan Kerusakan Ditangani Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarLaporanAktif.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Laporan Kerusakan Lanjutan'
+        },
+        path: '/staff/daftar-laporan-lanjutan',
+        name: 'Daftar Laporan Kerusakan Lanjutan Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarLaporanLanjutan.vue')
+      },
+      {
+        meta: {
+          title: 'Riwayat Laporan Kerusakan'
+        },
+        path: '/staff/riwayat-laporan',
+        name: 'Riwayat Laporan Staff Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/RiwayatLaporan.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Peminjaman Kendaraan Masuk'
+        },
+        path: '/staff/daftar-peminjaman-masuk',
+        name: 'Daftar Peminjaman Masuk Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarPeminjamanMasuk.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Peminjaman Kendaraan Aktif'
+        },
+        path: '/staff/daftar-peminjaman-aktif',
+        name: 'Daftar Peminjaman Aktif Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarPeminjamanAktif.vue')
+      },
+      {
+        meta: {
+          title: 'Riwayat Peminjaman Kendaraan'
+        },
+        path: '/staff/riwayat-peminjaman',
+        name: 'Riwayat Peminjaman Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/RiwayatPeminjaman.vue')
+      },
+      {
+        meta: {
+          title: 'Form Permintaan Servis'
+        },
+        path: '/staff/buat-servis',
+        name: 'Buat Servis Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/BuatServis.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Permintaan Servis Masuk'
+        },
+        path: '/staff/daftar-servis-masuk',
+        name: 'Daftar Servis Masuk Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarServisMasuk.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Permintaan Servis Aktif'
+        },
+        path: '/staff/daftar-servis-aktif',
+        name: 'Daftar Servis Aktif Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarServisAktif.vue')
+      },
+      {
+        meta: {
+          title: 'Riwayat Permintaan Servis'
+        },
+        path: '/staff/riwayat-servis',
+        name: 'Riwayat Servis Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/RiwayatServis.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Stok Barang'
+        },
+        path: '/staff/daftar-stok-barang',
+        name: 'Daftar Stok Barang Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarStokBarang.vue')
+      },
+      {
+        meta: {
+          title: 'Daftar Stok Kendaraan'
+        },
+        path: '/staff/daftar-kendaraan',
+        name: 'Daftar Kendaraan Staff',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/DaftarKendaraan.vue')
+      }
+    ]
+  },
+  {
     path: '/',
     redirect: '/home'
   },
@@ -336,6 +473,24 @@ const routes = [
     path: '/home',
     name: 'home',
     component: () => import(/* webpackChunkName: "login" */ '@/views/Home.vue')
+  },
+  {
+    meta: {
+      title: 'Profile',
+      fullScreen: true
+    },
+    path: '/profile',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
+  },
+  {
+    meta: {
+      title: 'Ui',
+      fullScreen: true
+    },
+    path: '/akses',
+    name: 'ui',
+    component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
   },
   {
     meta: {

@@ -17,6 +17,12 @@ import JbButtons from '@/components/JbButtons.vue'
 import Divider from '@/components/Divider.vue'
 import FilePicker from '@/components/FilePicker.vue'
 // import TitledSection from '@/components/TitledSection.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const titleStack = ref(['User', 'Peminjaman Kendaraan'])
 
@@ -55,12 +61,12 @@ const upload = (id) => {
   formData.append('file', file.value)
   DataService.upload('/peminjamanKendaraans/upload/', id, formData, progressEvent)
     .then(response => {
-      alert('Berhasil membuat Peminjaman Kendaraan baru')
+      toast.success('Berhasil membuat Peminjaman Kendaraan baru')
       uploadPercent.value = 0
     })
     .catch((error) => {
       uploadPercent.value = 0
-      alert(error.message)
+      toast.success(error.message)
     })
   file.value = undefined
 }
@@ -99,9 +105,9 @@ const submit = () => {
         resetForm()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 </script>

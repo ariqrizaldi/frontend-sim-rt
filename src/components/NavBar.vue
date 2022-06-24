@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import {
   mdiForwardburger,
   mdiBackburger,
@@ -16,19 +17,25 @@ import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
 import NavBarMenu from '@/components/NavBarMenu.vue'
 import Icon from '@/components/Icon.vue'
 
+const props = defineProps({
+  aside: Boolean
+})
+
 const store = useStore()
+
+const router = useRouter()
 
 const lightBorderStyle = computed(() => store.state.lightBorderStyle)
 
 const toggleLightDark = () => {
   store.dispatch('darkMode')
 }
-
-const isNavBarVisible = computed(() => !store.state.isFullScreen)
-
+const isNavBarVisible = ref(true)
 const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 
-const userName = computed(() => store.state.userName)
+const currentUser = computed(() => store.state.auth.user)
+
+const userName = currentUser.value.username
 
 const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
 
@@ -45,14 +52,18 @@ const menuNavBarToggle = () => {
 const menuOpenLg = () => {
   store.dispatch('asideLgToggle', true)
 }
+const logOut = () => {
+  store.dispatch('auth/logout')
+  router.push('/login')
+}
 </script>
 
 <template>
   <nav
     v-show="isNavBarVisible"
     class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b z-30 w-screen shadow-md
-    transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
-    :class="[lightBorderStyle, {'ml-60 lg:ml-0':isAsideMobileExpanded}]"
+    transition-position lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
+    :class="[lightBorderStyle, {'ml-60 lg:ml-0':isAsideMobileExpanded}] + [ !props.aside ? 'xl:pl-60' : '']"
   >
     <div class="flex-1 items-stretch flex h-14">
       <nav-bar-item
@@ -65,7 +76,8 @@ const menuOpenLg = () => {
         />
       </nav-bar-item>
       <div
-        class="flex items-center lg:hidden"
+        class="flex items-center"
+        :class="[ !props.aside ? 'lg:hidden' : 'px-4']"
       >
         <span>SIM-RT</span><b class="font-black px-1">BPS RI</b>
       </div>
@@ -116,7 +128,10 @@ const menuOpenLg = () => {
             is-desktop-icon-only
           />
         </nav-bar-item>
-        <nav-bar-item is-desktop-icon-only>
+        <nav-bar-item
+          is-desktop-icon-only
+          @click.prevent="logOut"
+        >
           <nav-bar-item-label
             :icon="mdiLogout"
             label="Log out"
