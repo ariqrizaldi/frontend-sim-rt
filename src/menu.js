@@ -398,80 +398,19 @@ export const adminGudang = [
   'General',
   [
     {
-      to: '/admin/dashboard',
-      icon: mdiDesktopMac,
-      label: 'Dashboard'
+      to: '/admin-gudang/kelola-unit-barang',
+      icon: mdiResponsive,
+      label: 'Kelola Unit Barang'
     },
     {
-      label: 'Submenu 1',
-      subLabel: 'Submenus Example',
-      icon: mdiViewList,
-      menu: [
-        {
-          to: '/admin/profile',
-          label: 'Profile',
-          icon: mdiAccountCircle
-        },
-        {
-          to: '/admin/tables',
-          label: 'Tables',
-          icon: mdiTable
-        },
-        {
-          to: '/admin/forms',
-          label: 'Forms',
-          icon: mdiSquareEditOutline
-        }
-      ]
+      to: '/admin-gudang/kelola-barang',
+      icon: mdiResponsive,
+      label: 'Kelola Jenis Barang'
     },
     {
-      label: 'Submenu 2',
-      subLabel: 'Submenus',
-      icon: mdiViewList,
-      menu: [
-        {
-          to: '/admin/ui',
-          label: 'UI',
-          icon: mdiTelevisionGuide
-        },
-        {
-          to: '/admin/responsive',
-          label: 'Responsive',
-          icon: mdiResponsive
-        },
-        {
-          to: '/login',
-          label: 'Login',
-          icon: mdiLock
-        },
-        {
-          to: '/error',
-          label: 'Error',
-          icon: mdiAlertCircle
-        }
-      ]
-    },
-    {
-      label: 'Submenu 1',
-      subLabel: 'Submenus Example',
-      icon: mdiViewList,
-      menu: [
-        {
-          to: '/admin/profile',
-          label: 'Profile',
-          icon: mdiAccountCircle
-        },
-        {
-          to: '/admin/tables',
-          label: 'Tables',
-          icon: mdiTable
-        },
-        {
-          to: '/admin/forms',
-          label: 'Forms',
-          icon: mdiSquareEditOutline
-        }
-      ]
+      to: '/admin-gudang/kelola-arus-barang',
+      icon: mdiResponsive,
+      label: 'Kelola Arus Barang'
     }
   ]
 ]

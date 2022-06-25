@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // import Admin from '@/layouts/Admin.vue'
 import User from '@/layouts/User.vue'
 import Staff from '@/layouts/Staff.vue'
+import AdminGudang from '@/layouts/AdminGudang.vue'
 import Admin from '@/layouts/Admin.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import Teknisi from '@/layouts/Teknisi.vue'
@@ -70,41 +71,14 @@ const routes = [
         path: '/user/daftar-servis',
         name: 'Daftar Servis',
         component: () => import(/* webpackChunkName: "tables" */ '@/views/User/DaftarServis.vue')
-      },
-      {
-        meta: {
-          title: 'Tables'
-        },
-        path: '/user/tables',
-        name: 'tables',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
-      },
-      {
-        meta: {
-          title: 'Forms'
-        },
-        path: '/user/forms',
-        name: 'forms',
-        component: () => import(/* webpackChunkName: "forms" */ '@/views/Forms.vue')
-      },
-      {
-        meta: {
-          title: 'Responsive layout'
-        },
-        path: '/user/responsive',
-        name: 'responsive',
-        component: () => import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
       }
-
     ]
   },
   {
     path: '/teknisi',
     redirect: '/teknisi/pekerjaan',
     component: Teknisi,
+    meta: { authorize: 'ROLE_TEKNISI' },
     children: [
       {
         // Document title tag
@@ -323,6 +297,40 @@ const routes = [
     ]
   },
   {
+    path: '/admin-gudang',
+    redirect: '/admin-gudang/dashboard',
+    component: AdminGudang,
+    meta: { authorize: 'ROLE_ADMINGUDANG' },
+    children: [
+      // Document title tag
+      // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+      {
+        meta: {
+          title: 'Kelola Unit Barang'
+        },
+        path: '/admin-gudang/kelola-unit-barang',
+        name: 'Kelola Unit Barang Gudang',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/KelolaUnitBarang.vue')
+      },
+      {
+        meta: {
+          title: 'Kelola Jenis Barang '
+        },
+        path: '/admin-gudang/kelola-barang',
+        name: 'Kelola Jenis Barang Gudang',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/KelolaJenisBarang.vue')
+      },
+      {
+        meta: {
+          title: 'Kelola Arus Barang'
+        },
+        path: '/admin-gudang/kelola-arus-barang',
+        name: 'Kelola Arus Barang Gudang',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Admin/KelolaArusBarang.vue')
+      }
+    ]
+  },
+  {
     path: '/staff',
     redirect: '/staff/dashboard',
     component: Staff,
@@ -482,15 +490,6 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
-  },
-  {
-    meta: {
-      title: 'Ui',
-      fullScreen: true
-    },
-    path: '/akses',
-    name: 'ui',
-    component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
   },
   {
     meta: {
