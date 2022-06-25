@@ -15,5 +15,5 @@ body {
 }
 
 .full-screen body {
-  @apply pt-14 p-0;
+  @apply p-0;
 }

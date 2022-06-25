@@ -115,7 +115,6 @@ const submit = () => {
       role: form.role,
       isEnable: true
     }
-    console.log(data)
     DataService.create('/users', data)
       .then((response) => {
         store.dispatch('fetch', 'users')

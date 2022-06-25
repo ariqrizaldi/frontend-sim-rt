@@ -4,7 +4,7 @@ import { useStore } from 'vuex'
 import useValidate from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import DataService from '@/services/data.service'
-import { mdiExport, mdiFilter, mdiPlus, mdiCheckBold, mdiCloseThick } from '@mdi/js'
+import { mdiPlus, mdiCheckBold, mdiCloseThick } from '@mdi/js'
 import { convertDate } from '@/helper.js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
@@ -46,10 +46,6 @@ const items = computed(() => store.getters.getLaporanKerusakanMasuk)
 const pelapor = computed(() => store.getters.getUsers)
 
 const jenis = computed(() => store.getters.getJenisKerusakan)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const isModalSuccessActive = ref(false)
 
@@ -180,26 +176,6 @@ const submit = () => {
 
 <template>
   <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
     v-model="isModalSuccessActive"
     :large-title="'Tindak Lanjut Laporan #'+form.laporan"
     button="success"
@@ -255,21 +231,6 @@ const submit = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
       />
     </jb-buttons>
   </div>

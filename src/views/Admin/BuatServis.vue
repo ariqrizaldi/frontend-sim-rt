@@ -85,7 +85,6 @@ const submit = () => {
       status: 'Proses servis',
       user: form.pemegang
     }
-    console.log(data)
     DataService.create('/servisKendaraans', data)
       .then((response) => {
         store.dispatch('fetch', 'servisKendaraans')

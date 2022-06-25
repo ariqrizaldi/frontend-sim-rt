@@ -2,7 +2,7 @@
 import { computed, reactive, ref } from 'vue'
 import DataService from '@/services/data.service'
 import { useStore } from 'vuex'
-import { mdiExport, mdiFilter, mdiPlus, mdiEye, mdiStickerCheck, mdiDownload } from '@mdi/js'
+import { mdiPlus, mdiEye, mdiStickerCheck, mdiDownload } from '@mdi/js'
 import { convertDate } from '@/helper.js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
@@ -46,10 +46,6 @@ const jenis = computed(() => store.getters.getJenisKendaraan)
 const isModalActive = ref(false)
 
 const isModalConfirm = ref(false)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const detail = reactive({ user: '', namaBukti: '', buktiServis: null, keterangan: '' })
 
@@ -138,27 +134,6 @@ const tutup = () => {
 
 <template>
   <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-
-  <modal-box
     v-model="isModalActive"
     title="Detail Laporan"
     :has-submit="false"
@@ -222,21 +197,6 @@ const tutup = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
       />
     </jb-buttons>
   </div>

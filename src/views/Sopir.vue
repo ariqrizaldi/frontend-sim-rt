@@ -22,7 +22,7 @@ import CardTransactionBar from '@/components/CardTransactionBar.vue'
 import CardClientBar from '@/components/CardClientBar.vue'
 import TitleSubBar from '@/components/TitleSubBar.vue'
 
-const titleStack = ref('Teknisi')
+const titleStack = ref('Sopir')
 
 const chartData = ref(null)
 

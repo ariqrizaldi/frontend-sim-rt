@@ -28,7 +28,7 @@ onMounted(() => {
 })
 onBeforeMount(() => {
   if (loggedIn.value) {
-    router.push('/home')
+    router.go(-1)
   }
 })
 
@@ -56,7 +56,6 @@ const submit = () => {
       nama: form.nama,
       password: form.password
     }
-    console.log(data)
     store.dispatch('auth/login', data).then(
       (data) => {
         toast.success('Sukses Login')
@@ -130,12 +129,6 @@ const submit = () => {
           type="submit"
           color="info"
           label="Login"
-        />
-        <jb-button
-          to="/home"
-          color="info"
-          outline
-          label="Kembali"
         />
       </jb-buttons>
     </card-component>

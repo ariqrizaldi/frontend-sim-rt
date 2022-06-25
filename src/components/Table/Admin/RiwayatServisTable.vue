@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { convertDate } from '@/helper.js'
-import { mdiEye, mdiExport, mdiFilter, mdiPlus } from '@mdi/js'
+import { mdiEye, mdiExport, mdiPlus } from '@mdi/js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -38,8 +38,6 @@ const jenis = computed(() => store.getters.getJenisKendaraan)
 const isModalActive = ref(false)
 
 const isModalWarningActive = ref(false)
-
-const isModalFilter = ref(false)
 
 const isModalExport = ref(false)
 
@@ -98,16 +96,6 @@ const checked = (isChecked, item) => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalExport"
     large-title="Please confirm"

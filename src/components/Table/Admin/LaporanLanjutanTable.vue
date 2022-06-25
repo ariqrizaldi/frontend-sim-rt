@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { convertDate } from '@/helper.js'
-import { mdiExport, mdiFilter, mdiPlus } from '@mdi/js'
+import { mdiPlus } from '@mdi/js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -31,10 +31,6 @@ const darkMode = computed(() => store.state.darkMode)
 const items = computed(() => store.getters.getLaporanKerusakanLanjutan)
 
 const teknisi = computed(() => store.getters.getUsers)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const perPage = ref(10)
 
@@ -83,26 +79,6 @@ const checked = (isChecked, item) => {
 
 <template>
   <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
     v-model="isModalWarningActive"
     large-title="Konfirmasi Hapus"
     button="danger"
@@ -140,21 +116,6 @@ const checked = (isChecked, item) => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
       />
     </jb-buttons>
   </div>

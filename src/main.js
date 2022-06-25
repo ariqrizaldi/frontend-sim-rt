@@ -30,8 +30,6 @@ router.beforeEach(to => {
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta
   const currentUser = computed(() => store.state.auth.user)
-  console.log(authorize)
-  console.log(currentUser.value)
 
   if (authorize) {
     if (!currentUser.value) {

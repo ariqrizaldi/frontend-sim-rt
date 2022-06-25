@@ -27,8 +27,6 @@ const store = useStore()
 
 onMounted(() => {
   // dispatch the fetch action which commits a mutation 'SET_ITEMS' to update
-  store.dispatch('fetch', 'kendaraans')
-  store.dispatch('fetch', 'users')
   store.dispatch('fetch', 'arusBarangs')
   store.dispatch('fetch', 'barangs')
   v$.value.$validate()
@@ -102,7 +100,6 @@ const submit = () => {
         .then((response) => {
           toast.success('Berhasil membuat record barang baru')
           resetForm()
-          window.location.reload()
         })
         .catch(error => {
           toast.error(error.message)
@@ -120,7 +117,6 @@ const submit = () => {
           .then((response) => {
             toast.success('Berhasil membuat record barang baru')
             resetForm()
-            window.location.reload()
           })
           .catch(error => {
             toast.error(error.message)

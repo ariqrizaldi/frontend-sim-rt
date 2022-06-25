@@ -2,142 +2,72 @@
 import { computed, ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
-  mdiFinance,
-  mdiMonitorCellphone,
-  mdiReload,
-  mdiChartPie
+  mdiImageBroken,
+  mdiCarWrench,
+  mdiCarSelect
 } from '@mdi/js'
-import * as chartConfig from '@/components/Charts/chart.config.js'
-import LineChart from '@/components/Charts/LineChart.vue'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import CardWidget from '@/components/CardWidget.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import ClientsTable from '@/components/ClientsTable.vue'
 import Notification from '@/components/Notification.vue'
-import CardTransactionBar from '@/components/CardTransactionBar.vue'
-import CardClientBar from '@/components/CardClientBar.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
 
-const titleStack = ref(['Admin', 'Dashboard'])
+const titleStack = ref(['User', 'Dashboard'])
 
-const chartData = ref(null)
-
-const fillChartData = () => {
-  chartData.value = chartConfig.sampleChartData()
-}
+const currentUser = computed(() => store.state.auth.user)
 
 onMounted(() => {
-  fillChartData()
+  store.dispatch('fetchBy', {
+    payload: currentUser.value.id,
+    link: 'laporanKerusakans/user/',
+    state: 'laporanByUser'
+  })
+  store.dispatch('fetchBy', {
+    payload: currentUser.value.id,
+    link: 'peminjamanKendaraans/user/',
+    state: 'peminjamanByUser'
+  })
+  store.dispatch('fetchBy', {
+    payload: store.state.auth.user.id,
+    link: 'servisKendaraans/user/',
+    state: 'servisByUser'
+  })
 })
 
 const store = useStore()
-
-const clientBarItems = computed(() => store.state.clients.slice(0, 3))
-
-const transactionBarItems = computed(() => store.state.history.slice(0, 3))
-
+const laporan = computed(() => store.getters.getLaporanByUser)
+const peminjaman = computed(() => store.getters.getPeminjamanByUser)
+const servis = computed(() => store.getters.getServisByUser)
 //  const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-      <card-widget
-        trend="12%"
-        trend-type="up"
-        color="text-emerald-500"
-        :icon="mdiAccountMultiple"
-        :number="512"
-        label="Clients"
-      />
-      <card-widget
-        trend="12%"
-        trend-type="down"
-        color="text-blue-500"
-        :icon="mdiCartOutline"
-        :number="7770"
-        prefix="$"
-        label="Sales"
-      />
-      <card-widget
-        trend="Overflow"
-        trend-type="alert"
-        color="text-red-500"
-        :icon="mdiChartTimelineVariant"
-        :number="256"
-        suffix="%"
-        label="Performance"
-      />
-    </div>
-
-    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-      <div class="flex flex-col justify-between">
-        <card-transaction-bar
-          v-for="(transaction,index) in transactionBarItems"
-          :key="index"
-          :amount="transaction.amount"
-          :date="transaction.date"
-          :business="transaction.business"
-          :type="transaction.type"
-          :name="transaction.name"
-          :account="transaction.account"
-        />
-      </div>
-      <div class="flex flex-col justify-between">
-        <card-client-bar
-          v-for="client in clientBarItems"
-          :key="client.id"
-          :name="client.name"
-          :login="client.login"
-          :date="client.created"
-          :progress="client.progress"
-        />
-      </div>
-    </div>
-
-    <title-sub-bar
-      :icon="mdiChartPie"
-      title="Trends overview"
-    />
-
-    <card-component
-      title="Performance"
-      :icon="mdiFinance"
-      :header-icon="mdiReload"
-      class="mb-6"
-      @header-icon-click="fillChartData"
-    >
-      <div v-if="chartData">
-        <line-chart
-          :data="chartData"
-          class="h-96"
-        />
-      </div>
-    </card-component>
-
-    <title-sub-bar
-      :icon="mdiAccountMultiple"
-      title="Clients"
-    />
-
     <notification
       color="info"
       :icon="mdiMonitorCellphone"
     >
-      <b>Responsive table.</b> Collapses on mobile
+      <b>Selamat datang </b> {{ currentUser.username }}
     </notification>
-
-    <card-component
-      :icon="mdiMonitorCellphone"
-      title="Responsive table"
-      has-table
-    >
-      <clients-table />
-    </card-component>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
+      <card-widget
+        color="text-emerald-500"
+        :icon="mdiImageBroken"
+        :number="laporan.length"
+        label="Laporan Kerusakan"
+      />
+      <card-widget
+        color="text-blue-500"
+        :icon="mdiCarSelect"
+        :number="peminjaman.length"
+        label="Peminjaman Kendaraan"
+      />
+      <card-widget
+        color="text-yellow-500"
+        :icon="mdiCarWrench"
+        :number="servis.length"
+        label="Servis Kendaraan"
+      />
+    </div>
   </main-section>
 </template>

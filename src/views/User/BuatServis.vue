@@ -75,7 +75,6 @@ const submit = () => {
       status: 'Perlu ditinjau',
       user: store.state.auth.user.id
     }
-    console.log(data)
     DataService.create('/servisKendaraans', data)
       .then((response) => {
         store.dispatch('fetch', 'servisKendaraans')

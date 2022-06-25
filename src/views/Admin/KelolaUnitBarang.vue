@@ -108,7 +108,6 @@ const submitForm = () => {
     const data = {
       nama: form.nama
     }
-    console.log(data)
     DataService.create('/unitBarangs', data)
       .then((response) => {
         toast.success('Berhasil membuat Unit Barang baru')
@@ -132,7 +131,6 @@ const submitFormB = () => {
       jenisBarang: formB.jenisBarang,
       unitBarang: formB.unitBarang
     }
-    console.log(data)
     DataService.create('/barangs', data)
       .then((response) => {
         toast.success('Berhasil membuat Barang baru')
@@ -213,7 +211,6 @@ const submitFormB = () => {
           :options="pilihUnit"
         />
       </field>
-      <divider />
       <jb-buttons>
         <jb-button
           type="submit"

@@ -4,7 +4,7 @@ import { useStore } from 'vuex'
 import useValidate from '@vuelidate/core'
 import DataService from '@/services/data.service'
 import { required, minLength, helpers } from '@vuelidate/validators'
-import { mdiExport, mdiFilter, mdiPlus, mdiFileEdit } from '@mdi/js'
+import { mdiExport, mdiPlus, mdiFileEdit } from '@mdi/js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -46,8 +46,6 @@ const pemegang = computed(() => store.getters.getUsers)
 const jenis = computed(() => store.getters.getJenisKendaraan)
 
 const isModalWarningActive = ref(false)
-
-const isModalFilter = ref(false)
 
 const isModalExport = ref(false)
 
@@ -103,9 +101,14 @@ const form = reactive({
   nama: '',
   noPlat: '',
   jenisKendaraan: null,
-  pemegang: null
+  pemegang: null,
+  status: ''
 })
-
+const statusKendaraan = [
+  { id: 'Milik pribadi', nama: 'Milik pribadi' },
+  { id: 'Tersedia', nama: 'Tersedia' },
+  { id: 'Tidak Tersedia', nama: 'Tidak Tersedia' }
+]
 const rules = computed(() => {
   return {
     nama: {
@@ -119,7 +122,8 @@ const rules = computed(() => {
       )
     },
     noPlat: { required: helpers.withMessage('Wajib diisi', required) },
-    jenisKendaraan: { required: helpers.withMessage('Wajib memilih', required) }
+    jenisKendaraan: { required: helpers.withMessage('Wajib memilih', required) },
+    status: { required: helpers.withMessage('Wajib memilih', required) }
   }
 })
 const v$ = useValidate(rules, form)
@@ -132,6 +136,7 @@ const openModalEdit = (isModalActive, item) => {
     form.noPlat = item.noPlat
     form.jenisKendaraan = item.jenisKendaraan
     form.pemegang = item.pemegang
+    form.status = item.status
   }
 }
 
@@ -142,11 +147,10 @@ const update = () => {
       noPlat: form.noPlat,
       jenisKendaraan: form.jenisKendaraan,
       pemegang: form.pemegang,
-      status: 'Tersedia'
+      status: form.status
     }
     DataService.update('/kendaraans/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'kendaraans')
@@ -160,16 +164,6 @@ const update = () => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalExport"
     large-title="Please confirm"
@@ -227,6 +221,16 @@ const update = () => {
         :options="pemegang"
       />
     </field>
+    <field
+      label="Status Kendaraan"
+      :error="v$.status.$error"
+      :message="v$.status.$errors[0]"
+    >
+      <control
+        v-model="form.status"
+        :options="statusKendaraan"
+      />
+    </field>
   </modal-box>
   <div
     v-if="checkedRows.length"
@@ -255,14 +259,6 @@ const update = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
       />
       <jb-button
         color="light"
@@ -318,7 +314,10 @@ const update = () => {
         <td data-label="No Plat">
           {{ client.noPlat }}
         </td>
-        <td data-label="Jenis Kendaraan">
+        <td
+          v-if="client.jenisKendaraan"
+          data-label="Jenis Kendaraan"
+        >
           {{ jenis.find( n => n.id == client.jenisKendaraan).nama }}
         </td>
         <td

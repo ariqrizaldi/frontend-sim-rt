@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { mdiExport, mdiFilter, mdiPlus, mdiFileEdit } from '@mdi/js'
+import { mdiPlus, mdiFileEdit } from '@mdi/js'
 // import { convertDate } from '@/helper.js'
 import useValidate from '@vuelidate/core'
 import DataService from '@/services/data.service'
@@ -41,10 +41,6 @@ const darkMode = computed(() => store.state.darkMode)
 const items = computed(() => store.getters.getJenisBarang)
 
 const isModalWarningActive = ref(false)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const perPage = ref(10)
 
@@ -135,7 +131,6 @@ const update = () => {
     }
     DataService.update('/jenisBarangs/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'jenisBarangs')
@@ -149,26 +144,6 @@ const update = () => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalWarningActive"
     :large-title="'Edit Jenis Barang #'+form.id"
@@ -222,21 +197,6 @@ const update = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
       />
     </jb-buttons>
   </div>

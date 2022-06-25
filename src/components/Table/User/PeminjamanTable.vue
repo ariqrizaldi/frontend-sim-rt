@@ -5,7 +5,7 @@ import useValidate from '@vuelidate/core'
 import DataService from '@/services/data.service'
 import { required, helpers } from '@vuelidate/validators'
 import { convertDate, toDate } from '@/helper.js'
-import { mdiEye, mdiFileEdit, mdiTrashCan, mdiExport, mdiFilter, mdiPlusCircle } from '@mdi/js'
+import { mdiEye, mdiFileEdit, mdiTrashCan, mdiPlusCircle } from '@mdi/js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -50,10 +50,6 @@ const isModalWarningActive = ref(false)
 const isModalDangerActive = ref(false)
 
 const isModalFeedbackActive = ref(false)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const perPage = ref(10)
 
@@ -288,16 +284,6 @@ const batal = () => {
     </p>
   </modal-box>
   <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
     v-model="isModalWarningActive"
     :large-title="'Edit Permintaan Peminjaman #'+form.id"
     button="info"
@@ -366,16 +352,6 @@ const batal = () => {
       />
     </field>
   </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <div
     v-if="checkedRows.length"
     class="bg-opacity-50 p-3 dark:bg-gray-800"
@@ -392,26 +368,6 @@ const batal = () => {
   </div>
   <div class="m-4 flex flex-wrap flex-auto">
     <search-field class="mr-2 lg:w-4/5 w-full" />
-    <jb-buttons
-      class="lg:mt-0 mt-4"
-      type="justify-center"
-      no-wrap
-    >
-      <jb-button
-        color="light"
-        label="Filter"
-        :icon="mdiFilter"
-        :outline="buttonsOutline"
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        :outline="buttonsOutline"
-        @click="isModalExport = true"
-      />
-    </jb-buttons>
   </div>
   <table>
     <thead>

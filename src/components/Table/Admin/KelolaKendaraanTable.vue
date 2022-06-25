@@ -117,7 +117,6 @@ const update = () => {
     }
     DataService.update('/jenisKendaraans/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'jenisKendaraans')

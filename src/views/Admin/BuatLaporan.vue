@@ -84,7 +84,6 @@ const submit = () => {
       status: 'Perlu ditinjau',
       user: form.user
     }
-    console.log(data)
     DataService.create('/laporanKerusakans', data)
       .then((response) => {
         store.dispatch('fetch', 'laporanKerusakans')

@@ -16,7 +16,7 @@ const overlayClick = () => {
 }
 </script>
 
-<template>
+<template class="pt-14">
   <nav-bar aside />
   <router-view />
   <footer-bar />

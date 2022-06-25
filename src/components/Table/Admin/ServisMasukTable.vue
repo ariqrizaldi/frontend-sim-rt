@@ -45,10 +45,6 @@ const servis = computed(() => store.getters.getJenisServis)
 
 const jenis = computed(() => store.getters.getJenisKendaraan)
 
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
-
 const isModalSuccessActive = ref(false)
 
 const isModalDangerActive = ref(false)
@@ -175,26 +171,6 @@ const submit = () => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalDangerActive"
     :large-title="'Konfirmasi Tolak Permintaan Servis #'+idServisBatal"

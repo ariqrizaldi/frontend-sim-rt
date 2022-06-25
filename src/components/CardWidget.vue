@@ -1,5 +1,5 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
+import { mdiArrowRightBoldBox } from '@mdi/js'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import CardComponent from '@/components/CardComponent.vue'
@@ -62,7 +62,7 @@ const darkMode = computed(() => store.state.darkMode)
         small
       />
       <jb-button
-        :icon="mdiCog"
+        :icon="mdiArrowRightBoldBox"
         icon-w="w-4"
         icon-h="h-4"
         :color="darkMode ? 'white' : 'light'"
@@ -72,7 +72,7 @@ const darkMode = computed(() => store.state.darkMode)
     </level>
     <level mobile>
       <div>
-        <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
+        <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400 mb-3">
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">
@@ -86,7 +86,7 @@ const darkMode = computed(() => store.state.darkMode)
       <icon
         v-if="icon"
         :path="icon"
-        size="48"
+        size="56"
         w=""
         h="h-16"
         :class="color"

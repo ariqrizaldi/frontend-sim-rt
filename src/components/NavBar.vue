@@ -67,6 +67,7 @@ const logOut = () => {
   >
     <div class="flex-1 items-stretch flex h-14">
       <nav-bar-item
+        v-if="!aside"
         type="flex lg:hidden"
         @click.prevent="menuToggleMobile"
       >
@@ -82,6 +83,7 @@ const logOut = () => {
         <span>SIM-RT</span><b class="font-black px-1">BPS RI</b>
       </div>
       <nav-bar-item
+        v-if="!aside"
         type="hidden lg:flex xl:hidden"
         @click.prevent="menuOpenLg"
       >

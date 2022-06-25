@@ -41,11 +41,18 @@ const pilihPemegang = computed(() => store.getters.getUsers)
 
 const pilihJenis = computed(() => store.getters.getJenisKendaraan)
 
+const statusKendaraan = [
+  { id: 'Milik pribadi', nama: 'Milik pribadi' },
+  { id: 'Tersedia', nama: 'Tersedia' },
+  { id: 'Tidak Tersedia', nama: 'Tidak Tersedia' }
+]
+
 const formAdd = reactive({
   nama: '',
   noPlat: '',
   jenisKendaraan: null,
-  pemegang: null
+  pemegang: null,
+  status: ''
 })
 
 const rules = computed(() => {
@@ -61,7 +68,8 @@ const rules = computed(() => {
       )
     },
     noPlat: { required: helpers.withMessage('Wajib diisi', required) },
-    jenisKendaraan: { required: helpers.withMessage('Wajib memilih', required) }
+    jenisKendaraan: { required: helpers.withMessage('Wajib memilih', required) },
+    status: { required: helpers.withMessage('Wajib memilih', required) }
   }
 })
 
@@ -70,19 +78,20 @@ const resetformAdd = () => {
   formAdd.noPlat = ''
   formAdd.jenisKendaraan = null
   formAdd.pemegang = null
+  formAdd.status = null
 }
 
 const vA$ = useValidate(rules, formAdd)
 
 const submit = () => {
-  if ((!vA$.value.nama.$error && !vA$.value.noPlat.$error && !vA$.value.jenisKendaraan.$error)) {
+  if ((!vA$.value.nama.$error && !vA$.value.noPlat.$error && !vA$.value.jenisKendaraan.$error && !vA$.value.status.$error)) {
     const data = {
       nama: formAdd.nama,
       noPlat: formAdd.noPlat,
       jenisKendaraan: formAdd.jenisKendaraan,
-      pemegang: formAdd.pemegang
+      pemegang: formAdd.pemegang,
+      status: formAdd.status
     }
-    console.log(data)
     DataService.create('/kendaraans', data)
       .then((response) => {
         toast.success('Berhasil membuat Kendaraan baru')
@@ -147,6 +156,16 @@ const submit = () => {
         <control
           v-model="formAdd.pemegang"
           :options="pilihPemegang"
+        />
+      </field>
+      <field
+        label="Status Kendaraan"
+        :error="vA$.status.$error"
+        :message="vA$.status.$errors[0]"
+      >
+        <control
+          v-model="formAdd.status"
+          :options="statusKendaraan"
         />
       </field>
       <divider />

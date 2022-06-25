@@ -4,7 +4,7 @@ import { useStore } from 'vuex'
 import useValidate from '@vuelidate/core'
 import DataService from '@/services/data.service'
 import { required, numeric, helpers } from '@vuelidate/validators'
-import { mdiExport, mdiFilter, mdiPlus, mdiFileEdit } from '@mdi/js'
+import { mdiExport, mdiPlus, mdiFileEdit } from '@mdi/js'
 import { convertDate } from '@/helper.js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
@@ -42,8 +42,6 @@ const darkMode = computed(() => store.state.darkMode)
 const items = computed(() => store.getters.getArusBarang)
 
 const isModalWarningActive = ref(false)
-
-const isModalFilter = ref(false)
 
 const isModalExport = ref(false)
 
@@ -120,7 +118,7 @@ const openModalEdit = (isModalActive, item) => {
   if (isModalActive) {
     v$.value.$validate()
     form.id = item.id
-    currentArus.value = item.barang
+    currentArus.value = item.kategori
     form.barang = item.barang
     form.keterangan = item.keterangan
     form.kategori = item.kategori
@@ -143,24 +141,27 @@ const update = () => {
     const barang = getBarang(data.barang)
     if (data.kategori === 'ARUS_MASUK') {
       if (data.kategori === currentArus.value && data.jumlah !== jumlah.value) {
-        barang.jumlah += (data.jumlah - jumlah.value)
+        if (data.jumlah > jumlah.value) {
+          const baru = computed(() => data.jumlah - jumlah.value)
+          barang.jumlah += baru.value
+        } else if (data.jumlah < jumlah.value) {
+          const baru = computed(() => jumlah.value - data.jumlah)
+          barang.jumlah -= baru.value
+        }
       } else if (data.kategori !== currentArus.value) {
         barang.jumlah += (data.jumlah + jumlah.value)
       }
       DataService.update('/barangs/', data.barang, barang)
         .then(response => {
-          console.log(response.data)
         })
         .catch(e => {
           toast.error(e.message)
         })
       DataService.update('/arusBarangs/', form.id, data)
         .then(response => {
-          console.log(response.data)
           toast.success('Telah diupdate')
           isModalWarningActive.value = false
           store.dispatch('fetch', 'arusBarangs')
-          window.location.reload()
         })
         .catch(e => {
           toast.error(e.message)
@@ -168,24 +169,27 @@ const update = () => {
     } else if (data.kategori === 'ARUS_KELUAR') {
       if (barang.jumlah >= (data.jumlah - jumlah.value)) {
         if (data.kategori === currentArus.value && data.jumlah !== jumlah.value) {
-          barang.jumlah -= (data.jumlah - jumlah.value)
+          if (data.jumlah > jumlah.value) {
+            const baru = computed(() => data.jumlah - jumlah.value)
+            barang.jumlah -= baru.value
+          } else if (data.jumlah < jumlah.value) {
+            const baru = computed(() => jumlah.value - data.jumlah)
+            barang.jumlah += baru.value
+          }
         } else if (data.kategori !== currentArus.value) {
           barang.jumlah -= (data.jumlah + jumlah.value)
         }
         DataService.update('/barangs/', data.barang, barang)
           .then(response => {
-            console.log(response.data)
           })
           .catch(e => {
             toast.error(e.message)
           })
         DataService.update('/arusBarangs/', form.id, data)
           .then(response => {
-            console.log(response.data)
             toast.success('Telah diupdate')
             isModalWarningActive.value = false
             store.dispatch('fetch', 'arusBarangs')
-            window.location.reload()
           })
           .catch(e => {
             toast.error(e.message)
@@ -200,16 +204,6 @@ const update = () => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalExport"
     large-title="Please confirm"
@@ -296,14 +290,6 @@ const update = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
       />
       <jb-button
         color="light"

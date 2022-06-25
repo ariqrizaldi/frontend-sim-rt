@@ -3,7 +3,7 @@ import { computed, reactive, ref } from 'vue'
 import DataService from '@/services/data.service'
 import { useStore } from 'vuex'
 import { convertDate, toDate, dateInput } from '@/helper.js'
-import { mdiEye, mdiFileEdit, mdiExport, mdiFilter, mdiStickerCheck } from '@mdi/js'
+import { mdiEye, mdiFileEdit, mdiStickerCheck } from '@mdi/js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -47,10 +47,6 @@ const isModalActive = ref(false)
 const isModalWarningActive = ref(false)
 
 const isModalConfirm = ref(false)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const detailPeminjaman = reactive({ tanggalAmbil: '', tanggalKembali: '', tanggalAmbilKunci: '', tanggalKembaliKunci: '' })
 
@@ -199,26 +195,6 @@ const tutup = () => {
 
 <template>
   <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
     v-model="isModalActive"
     title="Detail Tanggal"
     :has-submit="false"
@@ -301,27 +277,6 @@ const tutup = () => {
   </div>
   <div class="m-4 md:flex items-center md:justify-between">
     <search-field class="justify-center mr-2 md:w-3/6 w-full" />
-    <jb-buttons
-      class="md:mt-0 mt-4"
-      type="justify-center"
-      no-wrap
-    >
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
-      />
-    </jb-buttons>
   </div>
   <table>
     <thead>

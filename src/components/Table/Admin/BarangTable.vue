@@ -4,7 +4,7 @@ import { useStore } from 'vuex'
 import useValidate from '@vuelidate/core'
 import DataService from '@/services/data.service'
 import { required, numeric, minLength, helpers } from '@vuelidate/validators'
-import { mdiExport, mdiFilter, mdiPlus, mdiFileEdit } from '@mdi/js'
+import { mdiPlus, mdiFileEdit } from '@mdi/js'
 // import { convertDate } from '@/helper.js'
 import SearchField from '@/components/SearchField.vue'
 import ModalBox from '@/components/ModalBox.vue'
@@ -47,10 +47,6 @@ const jenis = computed(() => store.getters.getJenisBarang)
 const unit = computed(() => store.getters.getUnitBarang)
 
 const isModalWarningActive = ref(false)
-
-const isModalFilter = ref(false)
-
-const isModalExport = ref(false)
 
 const perPage = ref(10)
 
@@ -158,7 +154,6 @@ const update = () => {
     }
     DataService.update('/barangs/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'barangs')
@@ -173,26 +168,6 @@ const update = () => {
 </script>
 
 <template>
-  <modal-box
-    v-model="isModalFilter"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
-  <modal-box
-    v-model="isModalExport"
-    large-title="Please confirm"
-    button-label="Submit"
-    button="info"
-    has-cancel
-  >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </modal-box>
   <modal-box
     v-model="isModalWarningActive"
     :large-title="'Edit Barang #'+form.id"
@@ -282,21 +257,6 @@ const update = () => {
         label="Tambah"
         :icon="mdiPlus"
         @click="clickCreate"
-      />
-      <jb-button
-        color="light"
-        label="Filter"
-        tooltip="Filter"
-        :icon="mdiFilter"
-        outline
-        @click="isModalFilter= true"
-      />
-      <jb-button
-        color="light"
-        label="Export"
-        :icon="mdiExport"
-        outline
-        @click="isModalExport = true"
       />
     </jb-buttons>
   </div>

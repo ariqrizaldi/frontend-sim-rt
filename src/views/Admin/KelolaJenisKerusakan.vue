@@ -67,7 +67,6 @@ const submit = () => {
       nama: form.nama,
       deskripsi: form.deskripsi
     }
-    console.log(data)
     DataService.create('/jenisKerusakans', data)
       .then((response) => {
         toast.success('Berhasil membuat Jenis Kerusakan baru')
