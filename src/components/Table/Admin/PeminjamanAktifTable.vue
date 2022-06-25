@@ -15,6 +15,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -132,14 +138,14 @@ const update = () => {
   DataService.update('/peminjamanKendaraans/update-tanggal/', form.id, data)
     .then(response => {
       console.log(response.data)
-      alert('Telah diupdate')
+      toast.success('Telah diupdate')
       isModalWarningActive.value = false
       store.dispatch('fetch', 'peminjamanKendaraans')
       window.location.reload()
     })
     .catch(e => {
       console.log(data)
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 
@@ -164,30 +170,28 @@ const tutup = () => {
       key.kendaraan = response.data.kendaraan
       DataService.update('/pesananKendaraans/update/', key.id, statusKendaraan)
         .then(() => {
-          console.log('Telah diupdate')
         })
         .catch(e => {
-          alert(e.message)
+          toast.error(e.message)
         })
       DataService.update('/kendaraans/update/', key.kendaraan, status)
         .then(() => {
-          console.log('Telah diupdate')
         })
         .catch(e => {
-          alert(e.message)
+          toast.error(e.message)
         })
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
   DataService.update('/peminjamanKendaraans/update/', file.id, data)
     .then(() => {
-      alert('Peminjaman telah ditutup')
+      toast.success('Peminjaman telah ditutup')
       window.location.reload()
       isModalConfirm.value = false
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 

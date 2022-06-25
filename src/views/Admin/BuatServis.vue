@@ -17,6 +17,12 @@ import JbButtons from '@/components/JbButtons.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import Divider from '@/components/Divider.vue'
 // import TitledSection from '@/components/TitledSection.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const titleStack = ref(['Admin', 'Permintaan Servis Kendaraan'])
 
@@ -84,12 +90,13 @@ const submit = () => {
       .then((response) => {
         store.dispatch('fetch', 'servisKendaraans')
         upload(idNew)
+        toast.success('Berhasil membuat Servis Kendaraan baru')
         resetForm()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast('Isi form sesuai ketentuan')
 }
 const file = ref(null)
 
@@ -106,12 +113,12 @@ const upload = (id) => {
   formData.append('file', file.value)
   DataService.upload('/servisKendaraans/upload/surat-jalan/', id, formData, progressEvent)
     .then(response => {
-      alert('Berhasil membuat Servis Kendaraan baru')
+      toast.success('Berhasil Upload')
       uploadPercent.value = 0
     })
     .catch((error) => {
       uploadPercent.value = 0
-      alert(error.message)
+      toast.error(error.message)
     })
   file.value = undefined
 }

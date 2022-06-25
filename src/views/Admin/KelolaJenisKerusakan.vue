@@ -15,6 +15,12 @@ import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const store = useStore()
 
@@ -64,14 +70,15 @@ const submit = () => {
     console.log(data)
     DataService.create('/jenisKerusakans', data)
       .then((response) => {
-        alert('Berhasil membuat Jenis Kerusakan baru')
+        toast.success('Berhasil membuat Jenis Kerusakan baru')
         store.dispatch('fetch', 'jenisKerusakans')
         resetForm()
+        window.location.reload()
       })
       .catch(error => {
-        alert(error.message)
+        toast.success(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.success('Isi form sesuai ketentuan')
 }
 </script>
 

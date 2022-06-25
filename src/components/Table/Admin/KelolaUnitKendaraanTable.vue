@@ -15,6 +15,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean,
@@ -141,12 +147,13 @@ const update = () => {
     DataService.update('/kendaraans/', form.id, data)
       .then(response => {
         console.log(response.data)
-        alert('Telah diupdate')
+        toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'kendaraans')
+        window.location.reload()
       })
       .catch(e => {
-        alert(e.message)
+        toast.error(e.message)
       })
   }
 }

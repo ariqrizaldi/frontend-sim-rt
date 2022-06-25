@@ -45,7 +45,7 @@ const form = reactive({
   jenisKendaraan: 1,
   deskripsi: '',
   tanggal: '',
-  user: store.state.userId
+  user: store.state.auth.user.id
 })
 
 const uploadPercent = ref(0)
@@ -61,7 +61,7 @@ const upload = (id) => {
   formData.append('file', file.value)
   DataService.upload('/peminjamanKendaraans/upload/', id, formData, progressEvent)
     .then(response => {
-      toast.success('Berhasil membuat Peminjaman Kendaraan baru')
+      toast.success('Berhasil Upload')
       uploadPercent.value = 0
     })
     .catch((error) => {
@@ -102,6 +102,7 @@ const submit = () => {
       .then((response) => {
         store.dispatch('fetch', 'peminjamanKendaraans')
         upload(idNew)
+        toast.success('Berhasil membuat Peminjaman Kendaraan baru')
         resetForm()
       })
       .catch(error => {

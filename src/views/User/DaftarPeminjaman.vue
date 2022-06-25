@@ -15,7 +15,7 @@ const store = useStore()
 onMounted(() => {
   // dispatch the fetch action which commits a mutation 'SET_ITEMS' to update
   store.dispatch('fetchBy', {
-    payload: store.state.userId,
+    payload: store.state.auth.user.id,
     link: 'peminjamanKendaraans/user/',
     state: 'peminjamanByUser'
   })

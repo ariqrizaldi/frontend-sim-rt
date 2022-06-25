@@ -16,6 +16,12 @@ import JbButton from '@/components/JbButton.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import Divider from '@/components/Divider.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const store = useStore()
 
@@ -79,14 +85,15 @@ const submit = () => {
     console.log(data)
     DataService.create('/kendaraans', data)
       .then((response) => {
-        alert('Berhasil membuat Kendaraan baru')
+        toast.success('Berhasil membuat Kendaraan baru')
         store.dispatch('fetch', 'kendaraans')
         resetformAdd()
+        window.location.reload()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else { alert('Isi form sesuai ketentuan') }
+  } else { toast.error('Isi form sesuai ketentuan') }
 }
 </script>
 

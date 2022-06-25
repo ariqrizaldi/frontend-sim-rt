@@ -17,6 +17,12 @@ import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import Divider from '@/components/Divider.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -217,14 +223,15 @@ const update = () => {
     DataService.update('/servisKendaraans/', form.id, data)
       .then(response => {
         console.log(response.data)
-        alert('Telah diupdate')
+        toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'servisKendaraans')
+        window.location.reload()
       })
       .catch(e => {
-        alert(e.message)
+        toast.error(e.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 const beriFeedback = () => {
@@ -245,13 +252,14 @@ const beriFeedback = () => {
       .then(response => {
         console.log(response.data)
         isModalActive.value = false
-        alert('Telah diupdate')
+        toast.success('Telah diupdate')
         store.dispatch('fetch', 'servisKendaraans')
+        window.location.reload()
       })
       .catch(e => {
-        alert(e.message)
+        toast.error(e.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 const batal = () => {
@@ -263,12 +271,12 @@ const batal = () => {
     .then(response => {
       console.log(response.data)
       store.dispatch('fetch', 'servisKendaraans')
-      alert('Sukses dibatalkan')
+      toast.success('Sukses dibatalkan')
       isModalDangerActive.value = false
       window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 
@@ -285,13 +293,14 @@ const upload = () => {
   formData.append('file', formUpload.file)
   DataService.upload('/servisKendaraans/upload/bukti-servis/', formUpload.id, formData, progressEvent)
     .then(response => {
-      alert('Berhasil mengunggah bukti servis')
+      toast.success('Berhasil mengunggah bukti servis')
       uploadPercent.value = 0
       isModalBuktiActive.value = false
+      window.location.reload()
     })
     .catch((error) => {
       uploadPercent.value = 0
-      alert(error.message)
+      toast.error(error.message)
     })
   formUpload.file = undefined
 }

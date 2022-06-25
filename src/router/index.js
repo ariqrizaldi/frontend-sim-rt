@@ -78,7 +78,6 @@ const routes = [
     path: '/teknisi',
     redirect: '/teknisi/pekerjaan',
     component: Teknisi,
-    meta: { authorize: 'ROLE_TEKNISI' },
     children: [
       {
         // Document title tag
@@ -298,7 +297,7 @@ const routes = [
   },
   {
     path: '/admin-gudang',
-    redirect: '/admin-gudang/dashboard',
+    redirect: '/admin-gudang/kelola-unit-barang',
     component: AdminGudang,
     meta: { authorize: 'ROLE_ADMINGUDANG' },
     children: [

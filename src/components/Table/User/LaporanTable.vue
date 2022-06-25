@@ -17,6 +17,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -202,14 +208,15 @@ const update = () => {
     DataService.update('/laporanKerusakans/', form.id, data)
       .then(response => {
         console.log(response.data)
-        alert('Telah diupdate')
+        toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'laporanKerusakans')
+        window.location.reload()
       })
       .catch(e => {
-        alert(e.message)
+        toast.error(e.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 const beriFeedback = () => {
@@ -229,13 +236,14 @@ const beriFeedback = () => {
       .then(response => {
         console.log(response.data)
         isModalActive.value = false
-        alert('Telah diupdate')
+        toast.success('Telah diupdate')
         store.dispatch('fetch', 'laporanKerusakans')
+        window.location.reload()
       })
       .catch(e => {
-        alert(e.message)
+        toast.error(e.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 const batal = () => {
@@ -246,12 +254,13 @@ const batal = () => {
   DataService.update('/laporanKerusakans/update/', idLaporanBatal.value, data)
     .then(response => {
       console.log(response.data)
-      alert('Sukses dibatalkan')
+      toast.success('Sukses dibatalkan')
       isModalDangerActive.value = false
       store.dispatch('fetch', 'laporanKerusakans')
+      window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 

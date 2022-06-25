@@ -16,6 +16,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -131,7 +137,7 @@ const update = () => {
       keterangan: form.keterangan,
       kategori: form.kategori,
       jumlah: parseInt(form.jumlah),
-      user: store.state.userId
+      user: store.state.auth.user.id
     }
 
     const barang = getBarang(data.barang)
@@ -146,17 +152,18 @@ const update = () => {
           console.log(response.data)
         })
         .catch(e => {
-          alert(e.message)
+          toast.error(e.message)
         })
       DataService.update('/arusBarangs/', form.id, data)
         .then(response => {
           console.log(response.data)
-          alert('Telah diupdate')
+          toast.success('Telah diupdate')
           isModalWarningActive.value = false
           store.dispatch('fetch', 'arusBarangs')
+          window.location.reload()
         })
         .catch(e => {
-          alert(e.message)
+          toast.error(e.message)
         })
     } else if (data.kategori === 'ARUS_KELUAR') {
       if (barang.jumlah >= (data.jumlah - jumlah.value)) {
@@ -170,20 +177,21 @@ const update = () => {
             console.log(response.data)
           })
           .catch(e => {
-            alert(e.message)
+            toast.error(e.message)
           })
         DataService.update('/arusBarangs/', form.id, data)
           .then(response => {
             console.log(response.data)
-            alert('Telah diupdate')
+            toast.success('Telah diupdate')
             isModalWarningActive.value = false
             store.dispatch('fetch', 'arusBarangs')
+            window.location.reload()
           })
           .catch(e => {
-            alert(e.message)
+            toast.error(e.message)
           })
       } else {
-        alert('Barang tidak cukup tersedia jumlahnya')
+        toast.error('Barang tidak cukup tersedia jumlahnya')
       }
     }
   }

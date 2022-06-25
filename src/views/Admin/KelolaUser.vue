@@ -17,6 +17,12 @@ import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
 import Divider from '@/components/Divider.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const store = useStore()
 
@@ -113,11 +119,12 @@ const submit = () => {
     DataService.create('/users', data)
       .then((response) => {
         store.dispatch('fetch', 'users')
-        alert('Berhasil membuat user')
+        toast.success('Berhasil membuat user')
         resetForm()
+        window.location.reload()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
   }
 }

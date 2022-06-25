@@ -14,6 +14,12 @@ import Pill from '@/components/Pill.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import Field from '@/components/Field.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -114,12 +120,12 @@ const batal = () => {
   }
   DataService.update('/servisKendaraans/update/', idServisBatal.value, data)
     .then(response => {
-      alert('Sukses ditolak')
+      toast.success('Sukses ditolak')
       isModalDangerActive.value = false
       window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 
@@ -142,10 +148,11 @@ const upload = (id) => {
   DataService.upload('/servisKendaraans/upload/surat-jalan/', id, formData, progressEvent)
     .then(response => {
       uploadPercent.value = 0
+      toast.success('Sukses Upload Surat Jalan')
     })
     .catch((error) => {
       uploadPercent.value = 0
-      alert(error.message)
+      toast.error(error.message)
     })
   file.value = undefined
 }
@@ -158,11 +165,11 @@ const submit = () => {
   DataService.update('/servisKendaraans/update/', form.id, data)
     .then(response => {
       isModalSuccessActive.value = false
+      toast.success('Berhasil menindaklanjuti Permintaan servis')
       window.location.reload()
-      alert('Berhasil menindaklanjuti Permintaan servis')
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 </script>

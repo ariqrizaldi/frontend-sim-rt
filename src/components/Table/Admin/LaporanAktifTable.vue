@@ -15,6 +15,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -141,11 +147,10 @@ const ubahPerbaikan = (id) => {
   }
   DataService.update('/laporanKerusakans/update/', id, data)
     .then(() => {
-      alert('Laporan telah diupdate')
-      window.location.reload()
+      toast.success('Laporan telah diupdate')
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 const buatLanjutan = () => {
@@ -161,12 +166,13 @@ const buatLanjutan = () => {
       window.location.reload()
     })
     .catch(error => {
-      alert(error.message)
+      toast.error(error.message)
     })
 }
 const tindakLanjut = (id, tindakan) => {
   if (tindakan === 'Perbaikan Teknisi') {
     ubahPerbaikan(id)
+    window.location.reload()
   } else if (tindakan === 'Perbaikan Pihak Ketiga') {
     formLanjut.laporan = id
     isModalActive.value = false
@@ -183,14 +189,14 @@ const update = () => {
   }
   DataService.update('/detailKerusakans/', form.id, data)
     .then(response => {
-      alert('Telah diupdate')
+      toast.success('Telah diupdate')
       isModalWarningActive.value = false
       store.dispatch('fetch', 'detailKerusakans')
       window.location.reload()
     })
     .catch(e => {
       console.log(data)
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 const file = reactive({
@@ -203,12 +209,12 @@ const tutup = () => {
   }
   DataService.update('/laporanKerusakans/update/', file.id, data)
     .then(() => {
-      alert('Laporan telah ditutup')
-      window.location.reload()
+      toast.success('Laporan telah ditutup')
       isModalConfirm.value = false
+      window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 const checked = (isChecked, item) => {

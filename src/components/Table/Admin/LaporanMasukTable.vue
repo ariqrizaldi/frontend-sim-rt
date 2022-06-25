@@ -16,6 +16,12 @@ import Pill from '@/components/Pill.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -133,12 +139,12 @@ const batal = () => {
   DataService.update('/laporanKerusakans/update/', idLaporanBatal.value, data)
     .then(response => {
       console.log(response.data)
-      alert('Sukses ditolak')
+      toast.success('Sukses ditolak')
       isModalDangerActive.value = false
       window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 const submit = () => {
@@ -157,18 +163,18 @@ const submit = () => {
         DataService.update('/laporanKerusakans/update/', form.laporan, data)
           .then(response => {
             console.log(response.data)
-            alert('Sukses ditindaklanjuti')
+            toast.success('Sukses ditindaklanjuti')
             isModalDangerActive.value = false
             window.location.reload()
           })
           .catch(e => {
-            alert(e.message)
+            toast.error(e.message)
           })
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 </script>
 

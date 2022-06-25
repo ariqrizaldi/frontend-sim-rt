@@ -16,6 +16,12 @@ import JbButton from '@/components/JbButton.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import Divider from '@/components/Divider.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const store = useStore()
 
@@ -81,50 +87,49 @@ const submit = () => {
       keterangan: form.keterangan,
       kategori: form.kategori,
       jumlah: parseInt(form.jumlah),
-      user: store.state.userId
+      user: store.state.auth.user.id
     }
     const barang = getBarang(data.barang)
     if (data.kategori === 'ARUS_MASUK') {
       barang.jumlah += data.jumlah
       DataService.update('/barangs/', data.barang, barang)
         .then(response => {
-          console.log(response.data)
         })
         .catch(e => {
-          alert(e.message)
+          toast.error(e.message)
         })
       DataService.create('/arusBarangs', data)
         .then((response) => {
-          alert('Berhasil membuat record barang baru')
+          toast.success('Berhasil membuat record barang baru')
           resetForm()
           window.location.reload()
         })
         .catch(error => {
-          alert(error.message)
+          toast.error(error.message)
         })
     } else if (data.kategori === 'ARUS_KELUAR') {
       if (barang.jumlah >= data.jumlah) {
         barang.jumlah -= data.jumlah
         DataService.update('/barangs/', data.barang, barang)
           .then(response => {
-            console.log(response.data)
           })
           .catch(e => {
-            alert(e.message)
+            toast.error(e.message)
           })
         DataService.create('/arusBarangs', data)
           .then((response) => {
-            alert('Berhasil membuat record barang baru')
+            toast.success('Berhasil membuat record barang baru')
             resetForm()
+            window.location.reload()
           })
           .catch(error => {
-            alert(error.message)
+            toast.error(error.message)
           })
       } else {
-        alert('Barang tidak cukup tersedia jumlahnya')
+        toast.error('Barang tidak cukup tersedia jumlahnya')
       }
     }
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 </script>
 

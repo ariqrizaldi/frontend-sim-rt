@@ -12,6 +12,12 @@ import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
 import Pill from '@/components/Pill.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 defineProps({
   checkable: Boolean
@@ -120,11 +126,12 @@ const tutup = () => {
   }
   DataService.update('/servisKendaraans/update/', file.id, data)
     .then(() => {
-      alert('Servis telah ditutup')
+      toast.success('Servis telah ditutup')
       isModalConfirm.value = false
+      window.location.reload()
     })
     .catch(e => {
-      alert(e.message)
+      toast.error(e.message)
     })
 }
 </script>

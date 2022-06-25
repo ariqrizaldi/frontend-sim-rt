@@ -16,6 +16,12 @@ import JbButton from '@/components/JbButton.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import Divider from '@/components/Divider.vue'
 // import TitledSection from '@/components/TitledSection.vue'
+import { createToaster } from '@meforma/vue-toaster'
+
+const toast = createToaster({
+  position: 'top',
+  duration: 2000
+})
 
 const titleStack = ref(['User', 'Permintaan Servis Kendaraan'])
 
@@ -67,19 +73,19 @@ const submit = () => {
       tanggalServis: toDate(form.tanggal),
       kategori: 'MASUK',
       status: 'Perlu ditinjau',
-      user: store.state.userId
+      user: store.state.auth.user.id
     }
     console.log(data)
     DataService.create('/servisKendaraans', data)
       .then((response) => {
         store.dispatch('fetch', 'servisKendaraans')
-        alert('Berhasil membuat Servis Kendaraan baru')
+        toast.success('Berhasil membuat Servis Kendaraan baru')
         resetForm()
       })
       .catch(error => {
-        alert(error.message)
+        toast.error(error.message)
       })
-  } else alert('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 
 </script>
