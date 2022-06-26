@@ -42,6 +42,7 @@ const submitPass = () => {
     <div class="flex leading-tight flex-wrap items-center mb-6 justify-center">
       <card-component
         v-if="check('ROLE_STAFF')"
+        class="mx-2 mb-4"
         title="Akses Staff"
         :icon="mdiAccountCircle"
       >
@@ -56,6 +57,7 @@ const submitPass = () => {
       </card-component>
       <card-component
         v-if="check('ROLE_ADMIN')"
+        class="mx-2 mb-4"
         title="Akses Admin"
         :icon="mdiAccountCircle"
       >
@@ -70,6 +72,7 @@ const submitPass = () => {
       </card-component>
       <card-component
         v-if="check('ROLE_USER')"
+        class="mx-2 mb-4"
         title="Akses User"
         :icon="mdiAccountCircle"
       >
@@ -84,6 +87,7 @@ const submitPass = () => {
       </card-component>
       <card-component
         v-if="check('ROLE_ADMINGUDANG')"
+        class="mx-2 mb-4"
         title="Akses Admin Gudang"
         :icon="mdiAccountCircle"
       >
@@ -98,6 +102,7 @@ const submitPass = () => {
       </card-component>
       <card-component
         v-if="check('ROLE_TEKNISI')"
+        class="mx-2 mb-4"
         title="Akses Teknisi"
         :icon="mdiAccountCircle"
       >
@@ -112,6 +117,7 @@ const submitPass = () => {
       </card-component>
       <card-component
         v-if="check('ROLE_SOPIR')"
+        class="mx-2 mb-4"
         title="Akses Sopir"
         :icon="mdiAccountCircle"
       >
