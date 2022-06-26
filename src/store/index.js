@@ -80,7 +80,10 @@ export default createStore({
     servisByUser: [],
     peminjamanByUser: [],
     kendaraanPinjam: [],
-    detailKerusakan: []
+    detailKerusakan: [],
+    laporanKerusakanTeknisi: [],
+    pesananSopir: [],
+    pengawasanTeknisi: []
   },
   getters: {
     getClients: (state) => state.clients,
@@ -116,7 +119,10 @@ export default createStore({
     getServisByUser: (state) => state.servisByUser,
     getPeminjamanByUser: (state) => state.peminjamanByUser,
     getKendaraanTersedia: (state) => state.kendaraanPinjam,
-    getDetailLaporan: (state) => state.detailKerusakan
+    getDetailLaporan: (state) => state.detailKerusakan,
+    getLaporanByTeknisi: (state) => state.laporanKerusakanTeknisi,
+    getPengawasanTeknisi: (state) => state.pengawasanTeknisi,
+    getPesananSopir: (state) => state.pesananSopir
   },
   mutations: {
     /* A fit-them-all commit */

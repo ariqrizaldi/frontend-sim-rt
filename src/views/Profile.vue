@@ -133,7 +133,7 @@ const submitPass = () => {
           :icon="mdiAccountCircle"
         >
           <field>
-            <div class="flex leading-tight items-end text-lg md:text-xl text-gray-800 font-semibold">
+            <div class="flex leading-tight items-end text-lg md:text-xl text-gray-800 dark:text-gray-500 font-semibold">
               Id User
             </div>
             <div class="flex leading-tight items-end text-lg md:text-xl text-gray-600 font-medium">
@@ -141,7 +141,7 @@ const submitPass = () => {
             </div>
           </field>
           <field>
-            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 font-semibold">
+            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 dark:text-gray-500 font-semibold">
               Nama User
             </h2>
             <h3 class="flex leading-tight items-end text-md md:text-lg text-gray-600 font-medium">
@@ -149,7 +149,7 @@ const submitPass = () => {
             </h3>
           </field>
           <field>
-            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 font-semibold">
+            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 dark:text-gray-500 font-semibold">
               Email User
             </h2>
             <h3 class="flex leading-tight items-end text-md md:text-lg text-gray-600 font-medium">
@@ -157,7 +157,7 @@ const submitPass = () => {
             </h3>
           </field>
           <field>
-            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 font-semibold">
+            <h2 class="flex leading-tight items-end text-lg md:text-xl text-gray-800 dark:text-gray-500 font-semibold">
               Role User
             </h2>
             <h3 class="flex leading-tight items-end text-md md:text-lg text-gray-600 font-medium">

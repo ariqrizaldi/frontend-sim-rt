@@ -6,6 +6,7 @@ import AdminGudang from '@/layouts/AdminGudang.vue'
 import Admin from '@/layouts/Admin.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import Teknisi from '@/layouts/Teknisi.vue'
+import Sopir from '@/layouts/Sopir.vue'
 
 const routes = [
   {
@@ -75,9 +76,30 @@ const routes = [
     ]
   },
   {
+    path: '/sopir',
+    redirect: '/sopir/pekerjaan',
+    component: Sopir,
+    meta: { authorize: 'ROLE_SOPIR' },
+    children: [
+      {
+        // Document title tag
+        // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+        meta: {
+          title: 'Pekerjaan',
+          fullScreen: true
+        },
+        path: '/sopir/pekerjaan',
+        name: 'Dashboard Sopir',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/Sopir.vue')
+      }
+
+    ]
+  },
+  {
     path: '/teknisi',
     redirect: '/teknisi/pekerjaan',
     component: Teknisi,
+    meta: { authorize: 'ROLE_TEKNISI' },
     children: [
       {
         // Document title tag
