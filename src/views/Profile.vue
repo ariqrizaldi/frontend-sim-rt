@@ -39,7 +39,7 @@ const submitPass = () => {
   <nav-bar aside />
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div class="flex leading-tight flex-row items-center mb-6 justify-center">
+    <div class="flex leading-tight flex-wrap items-center mb-6 justify-center">
       <card-component
         v-if="check('ROLE_STAFF')"
         title="Akses Staff"
