@@ -191,7 +191,6 @@ const submitPass = () => {
             <control
               v-model="passwordForm.password_current"
               name="nama"
-              type="tel"
             />
           </field>
           <field
@@ -199,7 +198,6 @@ const submitPass = () => {
           >
             <control
               name="password"
-              type="tel"
             />
           </field>
           <jb-buttons>

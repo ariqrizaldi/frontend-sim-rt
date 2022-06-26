@@ -165,7 +165,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.nama"
-          type="tel"
+
           placeholder="Isi dengan nama kendaraan"
         />
       </field>
@@ -176,7 +176,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.jumlah"
-          type="tel"
+
           placeholder="Isi dengan jumlah barang"
         />
       </field>
@@ -187,7 +187,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.minJumlah"
-          type="tel"
+
           placeholder="Isi dengan minimal jumlah barang yang tersedia"
         />
       </field>
@@ -242,7 +242,7 @@ const submitFormB = () => {
       >
         <control
           v-model="form.nama"
-          type="tel"
+
           placeholder="Isi dengan nama unit barang"
         />
       </field>

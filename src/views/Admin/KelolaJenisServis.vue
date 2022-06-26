@@ -100,14 +100,14 @@ const submit = () => {
       >
         <control
           v-model="form.nama"
-          type="tel"
+
           placeholder="Isi dengan jenis servis"
         />
       </field>
       <field label="Deskripsi">
         <control
           v-model="form.deskripsi"
-          type="tel"
+
           placeholder="Isi dengan penjelasan terkait jenis servis"
         />
       </field>

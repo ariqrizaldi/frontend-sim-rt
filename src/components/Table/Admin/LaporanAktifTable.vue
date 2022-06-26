@@ -238,7 +238,7 @@ const pilihTindakan = [
     >
       <control
         v-model="formLanjut.pelaksana"
-        type="tel"
+
         placeholder="Pihak Ketiga yang mengerjakan"
       />
     </field>

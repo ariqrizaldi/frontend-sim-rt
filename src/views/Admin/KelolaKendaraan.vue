@@ -125,7 +125,7 @@ const submit = () => {
       >
         <control
           v-model="formAdd.nama"
-          type="tel"
+
           placeholder="Isi dengan nama kendaraan"
         />
       </field>
@@ -136,7 +136,7 @@ const submit = () => {
       >
         <control
           v-model="formAdd.noPlat"
-          type="tel"
+
           placeholder="Isi dengan no plat kendaraan"
         />
       </field>

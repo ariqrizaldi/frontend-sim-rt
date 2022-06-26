@@ -314,7 +314,7 @@ const batal = () => {
     >
       <control
         v-model="form.lokasi"
-        type="tel"
+
         placeholder="Tempat terjadi kerusakan"
       />
     </field>

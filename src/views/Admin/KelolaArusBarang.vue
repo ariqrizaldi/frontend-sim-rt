@@ -158,7 +158,7 @@ const submit = () => {
       >
         <control
           v-model="form.keterangan"
-          type="tel"
+
           placeholder="Isi dengan sebab barang masuk/keluar"
         />
       </field>
@@ -179,7 +179,7 @@ const submit = () => {
       >
         <control
           v-model="form.jumlah"
-          type="tel"
+
           placeholder="Isi dengan tambahan atau pengeluaran barang"
         />
       </field>

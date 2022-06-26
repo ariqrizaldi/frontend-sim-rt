@@ -147,7 +147,7 @@ const submit = () => {
       >
         <control
           v-model="form.nama"
-          type="tel"
+
           placeholder="Isi dengan nama pengguna"
         />
       </field>
@@ -158,7 +158,7 @@ const submit = () => {
       >
         <control
           v-model="form.nip"
-          type="tel"
+
           placeholder="Isi dengan NIP bagi pengguna Pegawai BPS RI"
         />
       </field>
@@ -169,7 +169,7 @@ const submit = () => {
       >
         <control
           v-model="form.email"
-          type="tel"
+
           placeholder="Isi dengan Email yang benar"
         />
       </field>
@@ -180,7 +180,7 @@ const submit = () => {
       >
         <control
           v-model="form.noTelp"
-          type="tel"
+
           placeholder="Isi dengan no telepon"
         />
       </field>

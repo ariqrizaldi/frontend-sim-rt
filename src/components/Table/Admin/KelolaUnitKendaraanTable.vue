@@ -188,7 +188,7 @@ const update = () => {
     >
       <control
         v-model="form.nama"
-        type="tel"
+
         placeholder="Isi dengan nama kendaraan"
       />
     </field>
@@ -199,7 +199,7 @@ const update = () => {
     >
       <control
         v-model="form.noPlat"
-        type="tel"
+
         placeholder="Isi dengan no plat kendaraan"
       />
     </field>
