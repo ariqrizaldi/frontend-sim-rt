@@ -2,7 +2,7 @@
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-  publicPath: process.env.DEPLOY_ENV === 'GH_PAGES'
+  publicPath: process.env.DEPLOY_ENV === 'production'
     ? '/simrt-frontend/'
     : '/',
 
