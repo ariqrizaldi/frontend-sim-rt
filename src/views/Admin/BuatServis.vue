@@ -75,6 +75,7 @@ const v$ = useValidate(rules, form)
 
 const submit = () => {
   const idNew = ps.value.at(-1).id + 1
+  console.log(idNew)
   if (!v$.value.$error) {
     const data = {
       jenisKendaraan: form.jenisKendaraan,
@@ -208,7 +209,7 @@ const upload = (id) => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

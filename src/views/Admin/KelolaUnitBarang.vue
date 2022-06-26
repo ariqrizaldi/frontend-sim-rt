@@ -165,7 +165,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.nama"
-
+          type="text"
           placeholder="Isi dengan nama kendaraan"
         />
       </field>
@@ -176,7 +176,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.jumlah"
-
+          type="number"
           placeholder="Isi dengan jumlah barang"
         />
       </field>
@@ -216,7 +216,7 @@ const submitFormB = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submitFormB"
+          @click.prevent="submitFormB"
         />
         <jb-button
           type="reset"
@@ -251,7 +251,7 @@ const submitFormB = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submitForm"
+          @click.prevent="submitForm"
         />
         <jb-button
           type="reset"

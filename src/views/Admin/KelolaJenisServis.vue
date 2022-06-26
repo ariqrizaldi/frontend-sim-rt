@@ -100,14 +100,14 @@ const submit = () => {
       >
         <control
           v-model="form.nama"
-
+          type="text"
           placeholder="Isi dengan jenis servis"
         />
       </field>
       <field label="Deskripsi">
         <control
           v-model="form.deskripsi"
-
+          type="text"
           placeholder="Isi dengan penjelasan terkait jenis servis"
         />
       </field>
@@ -116,7 +116,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

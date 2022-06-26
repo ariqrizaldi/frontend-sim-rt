@@ -182,6 +182,7 @@ const update = () => {
     >
       <control
         v-model="form.nama"
+        type="text"
 
         placeholder="Isi dengan nama kendaraan"
       />
@@ -193,7 +194,7 @@ const update = () => {
     >
       <control
         v-model="form.jumlah"
-
+        type="number"
         placeholder="Isi dengan jumlah barang"
       />
     </field>

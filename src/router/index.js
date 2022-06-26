@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 // import Admin from '@/layouts/Admin.vue'
 import User from '@/layouts/User.vue'
 import Staff from '@/layouts/Staff.vue'
@@ -517,14 +517,14 @@ const routes = [
       title: 'Halaman Tidak ditemukan',
       fullScreen: true
     },
-    path: '/:catchAll(.*)*',
+    path: '/:pathMatch(.*)*',
     name: 'Halaman Tidak ditemukan',
     component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { top: 0 }

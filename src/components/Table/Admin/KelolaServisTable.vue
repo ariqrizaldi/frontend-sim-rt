@@ -140,7 +140,7 @@ const update = () => {
     >
       <control
         v-model="form.nama"
-
+        type="text"
         placeholder="Isi dengan jenis servis"
       />
     </field>

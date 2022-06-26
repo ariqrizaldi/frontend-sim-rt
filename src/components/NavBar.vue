@@ -77,8 +77,7 @@ const logOut = () => {
         />
       </nav-bar-item>
       <div
-        class="flex items-center"
-        :class="[ !props.aside ? 'lg:hidden' : 'px-4']"
+        class="flex items-center px-4"
       >
         <span>SIM-RT</span><b class="font-black px-1">BPS RI</b>
       </div>

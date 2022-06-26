@@ -125,7 +125,7 @@ const submit = () => {
       >
         <control
           v-model="formAdd.nama"
-
+          type="text"
           placeholder="Isi dengan nama kendaraan"
         />
       </field>
@@ -136,7 +136,7 @@ const submit = () => {
       >
         <control
           v-model="formAdd.noPlat"
-
+          type="text"
           placeholder="Isi dengan no plat kendaraan"
         />
       </field>
@@ -174,7 +174,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

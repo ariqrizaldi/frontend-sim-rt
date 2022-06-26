@@ -98,7 +98,7 @@ const submit = () => {
       >
         <control
           v-model="form.lokasi"
-
+          type="text"
           placeholder="Tempat terjadi kerusakan"
         />
       </field>
@@ -129,7 +129,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

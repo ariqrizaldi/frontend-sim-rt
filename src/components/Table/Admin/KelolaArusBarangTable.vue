@@ -162,6 +162,7 @@ const update = () => {
           toast.success('Telah diupdate')
           isModalWarningActive.value = false
           store.dispatch('fetch', 'arusBarangs')
+          window.location.reload()
         })
         .catch(e => {
           toast.error(e.message)

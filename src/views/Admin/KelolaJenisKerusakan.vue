@@ -62,7 +62,7 @@ const rules = computed(() => {
 const v$ = useValidate(rules, form)
 
 const submit = () => {
-  if (!v$.value.$error) {
+  if (!v$.value.nama.$error) {
     const data = {
       nama: form.nama,
       deskripsi: form.deskripsi
@@ -75,9 +75,9 @@ const submit = () => {
         window.location.reload()
       })
       .catch(error => {
-        toast.success(error.message)
+        toast.error(error.message)
       })
-  } else toast.success('Isi form sesuai ketentuan')
+  } else toast.error('Isi form sesuai ketentuan')
 }
 </script>
 
@@ -100,14 +100,14 @@ const submit = () => {
       >
         <control
           v-model="form.nama"
-
+          type="text"
           placeholder="Isi dengan jenis kerusakan"
         />
       </field>
       <field label="Deskripsi">
         <control
           v-model="form.deskripsi"
-
+          type="text"
           placeholder="Isi dengan penjelasan terkait jenis kerusakan"
         />
       </field>
@@ -116,7 +116,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"
