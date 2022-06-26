@@ -191,7 +191,6 @@ const update = () => {
       window.location.reload()
     })
     .catch(e => {
-      console.log(data)
       toast.error(e.message)
     })
 }

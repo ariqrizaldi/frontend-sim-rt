@@ -218,7 +218,6 @@ const update = () => {
     }
     DataService.update('/servisKendaraans/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'servisKendaraans')
@@ -246,7 +245,6 @@ const beriFeedback = () => {
     }
     DataService.update('/servisKendaraans/', formFeedback.id, data)
       .then(response => {
-        console.log(response.data)
         isModalActive.value = false
         toast.success('Telah diupdate')
         store.dispatch('fetch', 'servisKendaraans')
@@ -265,7 +263,6 @@ const batal = () => {
   }
   DataService.update('/servisKendaraans/update/', idServisBatal.value, data)
     .then(response => {
-      console.log(response.data)
       store.dispatch('fetch', 'servisKendaraans')
       toast.success('Sukses dibatalkan')
       isModalDangerActive.value = false

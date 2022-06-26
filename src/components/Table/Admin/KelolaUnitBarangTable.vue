@@ -102,7 +102,6 @@ const openDeleteConfirm = (isModalActive, item) => {
 const hapus = () => {
   DataService.delete('/unitBarangs/', unitBarang.id)
     .then(response => {
-      console.log(response.data)
       toast.success('Berhasil dihapus')
       isModalActive.value = false
       store.dispatch('fetch', 'unitBarangs')

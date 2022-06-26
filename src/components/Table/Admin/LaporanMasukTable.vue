@@ -134,7 +134,6 @@ const batal = () => {
   }
   DataService.update('/laporanKerusakans/update/', idLaporanBatal.value, data)
     .then(response => {
-      console.log(response.data)
       toast.success('Sukses ditolak')
       isModalDangerActive.value = false
       window.location.reload()
@@ -158,7 +157,6 @@ const submit = () => {
         store.dispatch('fetch', 'detailKerusakans')
         DataService.update('/laporanKerusakans/update/', form.laporan, data)
           .then(response => {
-            console.log(response.data)
             toast.success('Sukses ditindaklanjuti')
             isModalDangerActive.value = false
             window.location.reload()

@@ -133,14 +133,12 @@ const update = () => {
   }
   DataService.update('/peminjamanKendaraans/update-tanggal/', form.id, data)
     .then(response => {
-      console.log(response.data)
       toast.success('Telah diupdate')
       isModalWarningActive.value = false
       store.dispatch('fetch', 'peminjamanKendaraans')
       window.location.reload()
     })
     .catch(e => {
-      console.log(data)
       toast.error(e.message)
     })
 }
