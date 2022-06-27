@@ -75,7 +75,6 @@ const v$ = useValidate(rules, form)
 
 const submit = () => {
   const idNew = ps.value.at(-1).id + 1
-  console.log(idNew)
   if (!v$.value.$error) {
     const data = {
       jenisKendaraan: form.jenisKendaraan,
