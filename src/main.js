@@ -6,6 +6,7 @@ import store from './store'
 import { darkModeKey, styleKey } from '@/config.js'
 
 import './css/main.css'
+import './registerServiceWorker'
 
 /* Fetch sample data
 store.dispatch('fetchClients', 'clients') */

@@ -99,6 +99,7 @@ const submit = () => {
       DataService.create('/arusBarangs', data)
         .then((response) => {
           toast.success('Berhasil membuat record barang baru')
+          window.location.reload()
           resetForm()
         })
         .catch(error => {
@@ -116,6 +117,7 @@ const submit = () => {
         DataService.create('/arusBarangs', data)
           .then((response) => {
             toast.success('Berhasil membuat record barang baru')
+            window.location.reload()
             resetForm()
           })
           .catch(error => {
@@ -158,7 +160,7 @@ const submit = () => {
       >
         <control
           v-model="form.keterangan"
-          type="tel"
+
           placeholder="Isi dengan sebab barang masuk/keluar"
         />
       </field>
@@ -179,7 +181,7 @@ const submit = () => {
       >
         <control
           v-model="form.jumlah"
-          type="tel"
+
           placeholder="Isi dengan tambahan atau pengeluaran barang"
         />
       </field>
@@ -189,7 +191,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

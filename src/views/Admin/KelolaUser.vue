@@ -85,7 +85,7 @@ const rules = computed(() => {
 
 const form = reactive({
   nama: '',
-  nip: '',
+  nip: null,
   email: '',
   password: '',
   noTelp: '',
@@ -105,7 +105,7 @@ const resetForm = () => {
 const v$ = useValidate(rules, form)
 
 const submit = () => {
-  if (!v$.value.$error) {
+  if (!v$.value.nama.$error && !v$.value.nip.$error && !v$.value.email.$error && !v$.value.password.$error && !v$.value.noTelp.$error && !v$.value.role.$error) {
     const data = {
       nama: form.nama,
       nip: form.nip,
@@ -120,12 +120,11 @@ const submit = () => {
         store.dispatch('fetch', 'users')
         toast.success('Berhasil membuat user')
         resetForm()
-        window.location.reload()
       })
       .catch(error => {
         toast.error(error.message)
       })
-  }
+  } else toast.error('Isi sesuai ketentuan')
 }
 </script>
 <template>
@@ -147,7 +146,7 @@ const submit = () => {
       >
         <control
           v-model="form.nama"
-          type="tel"
+          type="text"
           placeholder="Isi dengan nama pengguna"
         />
       </field>
@@ -158,7 +157,7 @@ const submit = () => {
       >
         <control
           v-model="form.nip"
-          type="tel"
+          type="text"
           placeholder="Isi dengan NIP bagi pengguna Pegawai BPS RI"
         />
       </field>
@@ -169,7 +168,7 @@ const submit = () => {
       >
         <control
           v-model="form.email"
-          type="tel"
+          type="email"
           placeholder="Isi dengan Email yang benar"
         />
       </field>
@@ -221,7 +220,7 @@ const submit = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submit"
+          @click.prevent="submit"
         />
         <jb-button
           type="reset"

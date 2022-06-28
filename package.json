@@ -2,13 +2,13 @@
   "name": "sim-rt",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite --host",
     "serve": "vue-cli-service serve",
-    "serve:vite": "vite preview",
     "build": "vue-cli-service build",
-    "build:vite": "vite build",
     "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix"
+    "build:vite": "vite build",
+    "dev": "vite --host",
+    "lint:fix": "vue-cli-service lint --fix",
+    "serve:vite": "vite preview"
   },
   "dependencies": {
     "@mdi/js": "^6.4.95",
@@ -21,6 +21,7 @@
     "moment": "^2.29.3",
     "numeral": "^2.0.6",
     "pinia": "^2.0.13",
+    "register-service-worker": "^1.7.2",
     "vee-validate": "^4.5.11",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
@@ -34,6 +35,7 @@
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/cli-plugin-babel": "^5.0.0",
     "@vue/cli-plugin-eslint": "^5.0.0",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-router": "^5.0.0",
     "@vue/cli-plugin-vuex": "^5.0.0",
     "@vue/cli-service": "^5.0.0",

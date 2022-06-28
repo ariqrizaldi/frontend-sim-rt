@@ -139,7 +139,7 @@ const update = () => {
     >
       <control
         v-model="form.nama"
-        type="tel"
+        type="text"
         placeholder="Isi dengan jenis kerusakan"
       />
     </field>

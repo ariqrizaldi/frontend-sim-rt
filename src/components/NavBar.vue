@@ -61,7 +61,7 @@ const logOut = () => {
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b z-30 w-screen shadow-md
+    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b z-40 w-screen shadow-md
     transition-position lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
     :class="[lightBorderStyle, {'ml-60 lg:ml-0':isAsideMobileExpanded}] + [ !props.aside ? 'xl:pl-60' : '']"
   >
@@ -77,8 +77,7 @@ const logOut = () => {
         />
       </nav-bar-item>
       <div
-        class="flex items-center"
-        :class="[ !props.aside ? 'lg:hidden' : 'px-4']"
+        class="flex items-center px-4"
       >
         <span>SIM-RT</span><b class="font-black px-1">BPS RI</b>
       </div>

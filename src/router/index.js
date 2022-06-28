@@ -517,7 +517,7 @@ const routes = [
       title: 'Halaman Tidak ditemukan',
       fullScreen: true
     },
-    path: '/:catchAll(.*)*',
+    path: '/:pathMatch(.*)*',
     name: 'Halaman Tidak ditemukan',
     component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }

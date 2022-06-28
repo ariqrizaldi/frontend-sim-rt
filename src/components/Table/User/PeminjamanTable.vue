@@ -197,7 +197,6 @@ const update = () => {
     }
     DataService.update('/peminjamanKendaraans/', form.id, data)
       .then(response => {
-        console.log(response.data)
         toast.success('Telah diupdate')
         isModalWarningActive.value = false
         store.dispatch('fetch', 'peminjamanKendaraans')
@@ -224,7 +223,6 @@ const beriFeedback = () => {
     }
     DataService.update('/peminjamanKendaraans/', formFeedback.id, data)
       .then(response => {
-        console.log(response.data)
         isModalActive.value = false
         toast.success('Telah diupdate')
         store.dispatch('fetch', 'peminjamanKendaraans')
@@ -243,7 +241,6 @@ const batal = () => {
   }
   DataService.update('/peminjamanKendaraans/update/', idPeminjamanBatal.value, data)
     .then(response => {
-      console.log(response.data)
       store.dispatch('fetch', 'peminjamanKendaraans')
       toast.success('Sukses dibatalkan')
       isModalDangerActive.value = false

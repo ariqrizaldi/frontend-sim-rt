@@ -182,7 +182,8 @@ const update = () => {
     >
       <control
         v-model="form.nama"
-        type="tel"
+        type="text"
+
         placeholder="Isi dengan nama kendaraan"
       />
     </field>
@@ -193,7 +194,7 @@ const update = () => {
     >
       <control
         v-model="form.jumlah"
-        type="tel"
+        type="number"
         placeholder="Isi dengan jumlah barang"
       />
     </field>
@@ -204,7 +205,7 @@ const update = () => {
     >
       <control
         v-model="form.minJumlah"
-        type="tel"
+
         placeholder="Isi dengan minimal jumlah barang yang tersedia"
       />
     </field>

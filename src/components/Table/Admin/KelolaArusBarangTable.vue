@@ -162,6 +162,7 @@ const update = () => {
           toast.success('Telah diupdate')
           isModalWarningActive.value = false
           store.dispatch('fetch', 'arusBarangs')
+          window.location.reload()
         })
         .catch(e => {
           toast.error(e.message)
@@ -238,7 +239,7 @@ const update = () => {
     >
       <control
         v-model="form.keterangan"
-        type="tel"
+
         placeholder="Isi dengan sebab barang masuk/keluar"
       />
     </field>
@@ -259,7 +260,7 @@ const update = () => {
     >
       <control
         v-model="form.jumlah"
-        type="tel"
+
         placeholder="Isi dengan tambahan atau pengeluaran barang"
       />
     </field>

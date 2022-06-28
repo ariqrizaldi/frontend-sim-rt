@@ -165,7 +165,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.nama"
-          type="tel"
+          type="text"
           placeholder="Isi dengan nama kendaraan"
         />
       </field>
@@ -176,7 +176,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.jumlah"
-          type="tel"
+          type="number"
           placeholder="Isi dengan jumlah barang"
         />
       </field>
@@ -187,7 +187,7 @@ const submitFormB = () => {
       >
         <control
           v-model="formB.minJumlah"
-          type="tel"
+
           placeholder="Isi dengan minimal jumlah barang yang tersedia"
         />
       </field>
@@ -216,7 +216,7 @@ const submitFormB = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submitFormB"
+          @click.prevent="submitFormB"
         />
         <jb-button
           type="reset"
@@ -242,7 +242,7 @@ const submitFormB = () => {
       >
         <control
           v-model="form.nama"
-          type="tel"
+
           placeholder="Isi dengan nama unit barang"
         />
       </field>
@@ -251,7 +251,7 @@ const submitFormB = () => {
           type="submit"
           color="info"
           label="Submit"
-          @click="submitForm"
+          @click.prevent="submitForm"
         />
         <jb-button
           type="reset"

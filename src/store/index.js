@@ -3,7 +3,7 @@ import axios from 'axios'
 import { auth } from './auth.module'
 import { darkModeKey, styleKey } from '@/config.js'
 import * as styles from '@/styles.js'
-const API_URL = 'http://localhost:8080/api/'
+const API_URL = 'https://simrt.herokuapp.com/api/'
 
 export default createStore({
   state: {
