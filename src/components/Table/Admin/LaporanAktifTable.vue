@@ -112,12 +112,12 @@ const remove = (arr, cb) => {
   return newArr
 }
 
-const clickDetail = (isModalActive, item, status) => {
+const clickDetail = (isModalActive, item, id, status) => {
   if (isModalActive) {
     detailLaporan.hasil = item.hasil
     detailLaporan.analisa = item.analisa
     detailLaporan.tindakan = item.tindakan
-    detailLaporan.laporan = item.laporan
+    detailLaporan.laporan = id
     detailLaporan.status = status
   }
 }
@@ -437,7 +437,7 @@ const pilihTindakan = [
               tooltip="Lihat Detail"
               :icon="mdiEye"
               small
-              @click="clickDetail( isModalActive = true, detail.find( n => n.laporan == client.id), client.status)"
+              @click="clickDetail( isModalActive = true, detail.find( n => n.laporan == client.id), client.id, client.status)"
             />
           </jb-buttons>
         </td>
